@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============ SEO ============ -->
+  <title>Privacy Policy | InfoSense — AI-Powered News &amp; Fact Checking</title>
+  <meta name="description" content="InfoSense Privacy Policy — how we collect, use, and protect your information. Learn about AI processing, Firebase services, data retention, account deletion, and your rights." />
+  <link rel="canonical" href="https://pradeetech.github.io/infosense/privacy.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Privacy Policy | InfoSense" />
+  <meta property="og:description" content="How InfoSense collects, uses, and protects your information — including AI processing, third-party services, and your data rights." />
+  <meta property="og:url" content="https://pradeetech.github.io/infosense/privacy.html" />
+  <meta property="og:image" content="assets/images/og-cover.png" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Privacy Policy | InfoSense" />
+  <meta name="twitter:description" content="Verify Before You Share. Read how InfoSense handles your data." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base:    '#0f172a',
+            surface: '#1e293b',
+            accent:  '#6366f1',
+            success: '#22c55e',
+            warning: '#f59e0b',
+            danger:  '#ef4444',
+          },
+          fontFamily: {
+            sans:    ['Inter', 'sans-serif'],
+            display: ['Poppins', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-base text-slate-300 font-sans antialiased">
+
+  <!-- Skip link (accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Scroll progress bar -->
+  <div id="progress-bar" role="presentation"></div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="fixed top-0 inset-x-0 z-50 glass">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5 group">
+          <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center shadow-lg shadow-accent/30">
+            <i class="fa-solid fa-magnifying-glass text-white text-sm" aria-hidden="true"></i>
+          </span>
+          <span class="font-display font-bold text-xl text-white tracking-tight">
+            Info<span class="text-accent">Sense</span>
+          </span>
+        </a>
+
+        <!-- Desktop nav -->
+        <ul class="hidden lg:flex items-center gap-7 text-sm font-medium">
+          <li><a href="index.html"            class="nav-link">Home</a></li>
+          <li><a href="index.html#features"   class="nav-link">Features</a></li>
+          <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="index.html#screenshots" class="nav-link">Screenshots</a></li>
+          <li><a href="about.html"            class="nav-link">About</a></li>
+          <li><a href="faq.html"              class="nav-link">FAQ</a></li>
+          <li><a href="privacy.html"          class="nav-link nav-link--active" aria-current="page">Privacy</a></li>
+          <li><a href="contact.html"          class="nav-link">Contact</a></li>
+        </ul>
+
+        <!-- CTA + hamburger -->
+        <div class="flex items-center gap-3">
+          <a href="index.html#download"
+             class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+                    bg-accent hover:bg-indigo-500 text-white text-sm font-semibold
+                    transition-all duration-200 hover:-translate-y-0.5 shadow-lg shadow-accent/30">
+            <i class="fa-solid fa-download text-xs" aria-hidden="true"></i>
+            Download App
+          </a>
+          <button id="menu-btn" class="lg:hidden w-10 h-10 grid place-items-center rounded-lg
+                 text-slate-300 hover:text-white hover:bg-white/10 transition"
+                 aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <i class="fa-solid fa-bars text-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden lg:hidden pb-4" aria-label="Mobile navigation">
+        <ul class="flex flex-col gap-1 text-sm font-medium pt-2 border-t border-white/10">
+          <li><a href="index.html"              class="mobile-link">Home</a></li>
+          <li><a href="index.html#features"     class="mobile-link">Features</a></li>
+          <li><a href="index.html#how-it-works" class="mobile-link">How It Works</a></li>
+          <li><a href="index.html#screenshots"  class="mobile-link">Screenshots</a></li>
+          <li><a href="about.html"              class="mobile-link">About</a></li>
+          <li><a href="faq.html"                class="mobile-link">FAQ</a></li>
+          <li><a href="privacy.html"            class="mobile-link mobile-link--active" aria-current="page">Privacy Policy</a></li>
+          <li><a href="terms.html"              class="mobile-link">Terms &amp; Conditions</a></li>
+          <li><a href="contact.html"            class="mobile-link">Contact</a></li>
+          <li class="pt-2">
+            <a href="index.html#download"
+               class="flex items-center justify-center gap-2 px-5 py-3 rounded-xl
+                      bg-accent text-white font-semibold">
+              <i class="fa-solid fa-download" aria-hidden="true"></i> Download App
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main id="main" class="pt-16">
+
+    <!-- ============ PAGE HERO ============ -->
+    <section class="relative overflow-hidden pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+      <!-- Soft glow decorations -->
+      <div class="absolute -top-32 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute -bottom-40 right-0 w-80 h-80 bg-indigo-800/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+      <div class="relative max-w-4xl mx-auto text-center reveal">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30
+                     text-accent text-xs font-semibold tracking-wide uppercase mb-5">
+          <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+          Legal Document
+        </span>
+
+        <h1 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">
+          Privacy <span class="text-accent">Policy</span>
+        </h1>
+
+        <p class="mt-4 text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          How InfoSense collects, uses, and protects your information — explained in
+          clear, simple language.
+        </p>
+
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs">
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-white/10">
+            <i class="fa-regular fa-calendar text-accent" aria-hidden="true"></i>
+            Last Updated:
+            <strong class="text-white font-semibold">September 3, 2026</strong>
+          </span>
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-white/10">
+            <i class="fa-solid fa-user-shield text-success" aria-hidden="true"></i>
+            Developer: <strong class="text-white font-semibold">PradeeTech</strong>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTENT + TOC ============ -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+      <div class="lg:grid lg:grid-cols-[270px_minmax(0,1fr)] lg:gap-10">
+
+        <!-- ---------- TOC (desktop) ---------- -->
+        <aside class="hidden lg:block" aria-label="Table of contents">
+          <nav class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2
+                      rounded-2xl bg-surface/60 border border-white/10 p-5">
+            <p class="font-display text-sm font-semibold text-white mb-4 flex items-center gap-2">
+              <i class="fa-solid fa-list-ul text-accent" aria-hidden="true"></i> On This Page
+            </p>
+            <ul class="space-y-1 text-sm" id="toc">
+              <li><a class="toc-link" href="#s1">1. About InfoSense</a></li>
+              <li><a class="toc-link" href="#s2">2. Information We Collect</a></li>
+              <li><a class="toc-link" href="#s3">3. How We Use Information</a></li>
+              <li><a class="toc-link" href="#s4">4. AI Processing</a></li>
+              <li><a class="toc-link" href="#s5">5. Third-Party Services</a></li>
+              <li><a class="toc-link" href="#s6">6. Data Sharing</a></li>
+              <li><a class="toc-link" href="#s7">7. Data Storage</a></li>
+              <li><a class="toc-link" href="#s8">8. Data Retention</a></li>
+              <li><a class="toc-link" href="#s9">9. Account &amp; Data Deletion</a></li>
+              <li><a class="toc-link" href="#s10">10. Children's Privacy</a></li>
+              <li><a class="toc-link" href="#s11">11. Advertising</a></li>
+              <li><a class="toc-link" href="#s12">12. Cookies &amp; Storage</a></li>
+              <li><a class="toc-link" href="#s13">13. Security</a></li>
+              <li><a class="toc-link" href="#s14">14. International Processing</a></li>
+              <li><a class="toc-link" href="#s15">15. Your Responsibilities</a></li>
+              <li><a class="toc-link" href="#s16">16. AI Disclaimer</a></li>
+              <li><a class="toc-link" href="#s17">17. Changes to Policy</a></li>
+              <li><a class="toc-link" href="#s18">18. Contact Us</a></li>
+              <li><a class="toc-link" href="#s19">19. Summary</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <!-- ---------- Mobile TOC ---------- -->
+        <details class="lg:hidden mb-6 rounded-2xl bg-surface border border-white/10 overflow-hidden">
+          <summary class="px-5 py-4 font-display font-semibold text-white cursor-pointer flex items-center gap-2
+                          list-none [&::-webkit-details-marker]:hidden">
+            <i class="fa-solid fa-list-ul text-accent" aria-hidden="true"></i>
+            On This Page
+            <i class="fa-solid fa-chevron-down ml-auto text-xs text-slate-400" aria-hidden="true"></i>
+          </summary>
+          <ul class="px-5 pb-4 space-y-2 text-sm border-t border-white/10 pt-3">
+            <li><a class="toc-link block py-1" href="#s1">1. About InfoSense</a></li>
+            <li><a class="toc-link block py-1" href="#s2">2. Information We Collect</a></li>
+            <li><a class="toc-link block py-1" href="#s3">3. How We Use Information</a></li>
+            <li><a class="toc-link block py-1" href="#s4">4. AI Processing</a></li>
+            <li><a class="toc-link block py-1" href="#s5">5. Third-Party Services</a></li>
+            <li><a class="toc-link block py-1" href="#s6">6. Data Sharing</a></li>
+            <li><a class="toc-link block py-1" href="#s7">7. Data Storage</a></li>
+            <li><a class="toc-link block py-1" href="#s8">8. Data Retention</a></li>
+            <li><a class="toc-link block py-1" href="#s9">9. Account &amp; Data Deletion</a></li>
+            <li><a class="toc-link block py-1" href="#s10">10. Children's Privacy</a></li>
+            <li><a class="toc-link block py-1" href="#s11">11. Advertising</a></li>
+            <li><a class="toc-link block py-1" href="#s12">12. Cookies &amp; Storage</a></li>
+            <li><a class="toc-link block py-1" href="#s13">13. Security</a></li>
+            <li><a class="toc-link block py-1" href="#s14">14. International Processing</a></li>
+            <li><a class="toc-link block py-1" href="#s15">15. Your Responsibilities</a></li>
+            <li><a class="toc-link block py-1" href="#s16">16. AI Disclaimer</a></li>
+            <li><a class="toc-link block py-1" href="#s17">17. Changes to Policy</a></li>
+            <li><a class="toc-link block py-1" href="#s18">18. Contact Us</a></li>
+            <li><a class="toc-link block py-1" href="#s19">19. Summary</a></li>
+          </ul>
+        </details>
+
+        <!-- ---------- Policy content ---------- -->
+        <article class="space-y-6 min-w-0">
+
+          <!-- Effective date banner -->
+          <div class="rounded-2xl bg-accent/10 border border-accent/25 p-5 flex items-start gap-4 reveal">
+            <i class="fa-solid fa-circle-info text-accent mt-1" aria-hidden="true"></i>
+            <p class="text-sm leading-relaxed">
+              <strong class="text-white">Effective Date:</strong> September 3, 2026 &nbsp;•&nbsp;
+              <strong class="text-white">Last Updated:</strong> September 3, 2026<br />
+              <span class="text-slate-400">InfoSense (“InfoSense,” “we,” “our,” or “us”), developed by
+              <strong class="text-slate-200">PradeeTech</strong>, respects your privacy and is committed to
+              protecting the information you provide when using the InfoSense mobile application,
+              website, and related services. By using InfoSense, you acknowledge that you have read
+              and understood this Privacy Policy.</span>
+            </p>
+          </div>
+
+          <!-- ===== 1. About InfoSense ===== -->
+          <section id="s1" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">1</span> About InfoSense</h2>
+            <p>InfoSense is an AI-assisted information and fact-checking platform designed to help users analyze news, claims, statements, and other submitted content.</p>
+            <p>InfoSense may provide classifications such as:</p>
+            <div class="flex flex-wrap gap-2 my-4">
+              <span class="chip chip-success"><i class="fa-solid fa-check" aria-hidden="true"></i> TRUE</span>
+              <span class="chip chip-danger"><i class="fa-solid fa-xmark" aria-hidden="true"></i> FALSE</span>
+              <span class="chip chip-warning"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> MISLEADING</span>
+              <span class="chip chip-neutral"><i class="fa-solid fa-circle-question" aria-hidden="true"></i> UNVERIFIED</span>
+            </div>
+            <p>These results are generated with the assistance of artificial intelligence and should not be considered an absolute guarantee of factual accuracy.</p>
+            <p>Users should consult reliable and authoritative sources when making important decisions.</p>
+          </section>
+
+          <!-- ===== 2. Information We Collect ===== -->
+          <section id="s2" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">2</span> Information We Collect</h2>
+            <p>Depending on the features you use, InfoSense may collect or process the following categories of information.</p>
+
+            <h3 class="policy-h3">2.1 — Account Information</h3>
+            <p>If you create an account or sign in using Google Authentication, we may receive information such as:</p>
+            <ul class="policy-list">
+              <li>Name</li>
+              <li>Email address</li>
+              <li>Profile picture URL</li>
+              <li>Firebase user identifier (UID)</li>
+            </ul>
+            <p>This information is used to create and manage your InfoSense account. We do not request or intentionally collect your Google password.</p>
+
+            <h3 class="policy-h3">2.2 — User-Submitted Content</h3>
+            <p>When you submit text, news claims, statements, or other information for analysis, the submitted content may be processed by our backend systems and third-party AI services used to provide the requested verification functionality.</p>
+            <p>Depending on the application's implemented features, submitted content may include:</p>
+            <ul class="policy-list">
+              <li>News claims</li>
+              <li>Social-media statements</li>
+              <li>Questions</li>
+              <li>Text copied from articles</li>
+              <li>Other information voluntarily entered by the user</li>
+            </ul>
+            <div class="callout callout-warning">
+              <i class="fa-solid fa-triangle-exclamation mt-0.5" aria-hidden="true"></i>
+              <p>Users should avoid submitting unnecessary sensitive personal information, passwords, payment information, or confidential information into the fact-checking input.</p>
+            </div>
+
+            <h3 class="policy-h3">2.3 — Usage Information</h3>
+            <p>We may collect information related to your use of InfoSense, including:</p>
+            <ul class="policy-list">
+              <li>Number of verification requests</li>
+              <li>Daily usage count</li>
+              <li>Account tier</li>
+              <li>Premium status</li>
+              <li>Feature usage</li>
+              <li>Authentication events</li>
+              <li>Error and diagnostic information</li>
+            </ul>
+            <p>Usage information may be used to enforce account limits, maintain service security, and improve the application.</p>
+
+            <h3 class="policy-h3">2.4 — Device and Technical Information</h3>
+            <p>When you use the mobile application, certain technical information may be automatically processed by the application or third-party services, such as:</p>
+            <ul class="policy-list">
+              <li>Device type</li>
+              <li>Operating system</li>
+              <li>Operating system version</li>
+              <li>Application version</li>
+              <li>Crash information</li>
+              <li>Basic diagnostic information</li>
+              <li>Network-related technical information</li>
+            </ul>
+            <p>We use this information primarily for security, troubleshooting, analytics, and improving application stability.</p>
+
+            <h3 class="policy-h3">2.5 — Website Information</h3>
+            <p>When you visit the InfoSense website, the website may process limited technical information required for normal operation. The website may also use browser storage technologies such as local storage for functionality such as:</p>
+            <ul class="policy-list">
+              <li>Theme preferences</li>
+              <li>User interface preferences</li>
+              <li>Temporary application state</li>
+            </ul>
+            <p>If analytics or other tracking technologies are enabled on the website in the future, this Privacy Policy may be updated accordingly.</p>
+          </section>
+
+          <!-- ===== 3. How We Use Information ===== -->
+          <section id="s3" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">3</span> How We Use Information</h2>
+            <p>We may use information for the following purposes:</p>
+
+            <h3 class="policy-h3">Account Management</h3>
+            <ul class="policy-list">
+              <li>Creating and maintaining user accounts</li>
+              <li>Authentication</li>
+              <li>Managing user sessions</li>
+              <li>Providing account-related functionality</li>
+            </ul>
+
+            <h3 class="policy-h3">AI-Powered Verification</h3>
+            <ul class="policy-list">
+              <li>Processing submitted claims</li>
+              <li>Generating AI-assisted analysis</li>
+              <li>Producing verification results</li>
+              <li>Providing explanations and supporting information where available</li>
+            </ul>
+
+            <h3 class="policy-h3">Usage Limits</h3>
+            <ul class="policy-list">
+              <li>Managing free-tier usage limits</li>
+              <li>Managing premium features</li>
+              <li>Preventing abuse of the service</li>
+              <li>Maintaining service availability</li>
+            </ul>
+
+            <h3 class="policy-h3">Security</h3>
+            <ul class="policy-list">
+              <li>Detecting suspicious activity</li>
+              <li>Preventing unauthorized access</li>
+              <li>Preventing abuse and automated attacks</li>
+              <li>Protecting the application and its users</li>
+            </ul>
+
+            <h3 class="policy-h3">Application Improvement</h3>
+            <ul class="policy-list">
+              <li>Understanding application performance</li>
+              <li>Diagnosing crashes and technical problems</li>
+              <li>Improving features and user experience</li>
+              <li>Monitoring service reliability</li>
+            </ul>
+
+            <h3 class="policy-h3">Advertising</h3>
+            <p>If advertisements are enabled within InfoSense, advertising providers such as Google AdMob may process certain device or advertising-related information in accordance with their own policies and applicable settings.</p>
+          </section>
+
+          <!-- ===== 4. AI Processing ===== -->
+          <section id="s4" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">4</span> Artificial Intelligence Processing</h2>
+            <p>InfoSense uses artificial intelligence technology to assist with information analysis and fact-checking.</p>
+            <p>Depending on the implementation of the service, submitted content may be transmitted securely to an AI service provider such as <strong class="text-white">Google Gemini</strong> for processing.</p>
+            <p>AI-generated results may contain errors, incomplete information, outdated information, or incorrect interpretations. Therefore:</p>
+            <div class="callout callout-accent">
+              <i class="fa-solid fa-robot mt-0.5" aria-hidden="true"></i>
+              <p><strong class="text-white">InfoSense does not guarantee that every AI-generated verification result is completely accurate, current, or error-free.</strong></p>
+            </div>
+            <p>Users should independently verify important information using reliable primary or authoritative sources. InfoSense should not be used as the sole basis for medical, legal, financial, emergency, or other high-impact decisions.</p>
+          </section>
+
+          <!-- ===== 5. Third-Party Services ===== -->
+          <section id="s5" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">5</span> Third-Party Services</h2>
+            <p>InfoSense may use third-party services to provide authentication, database, analytics, advertising, AI processing, crash reporting, hosting, or application update functionality. Depending on the features enabled in the application, these services may include:</p>
+
+            <h3 class="policy-h3"><i class="fa-solid fa-fire text-warning mr-1" aria-hidden="true"></i> Firebase</h3>
+            <p>Firebase may be used for services such as:</p>
+            <ul class="policy-list">
+              <li>Authentication</li>
+              <li>Cloud Firestore</li>
+              <li>Analytics</li>
+              <li>Crash reporting</li>
+              <li>Other application infrastructure</li>
+            </ul>
+            <p>Google's Firebase privacy information is available through Google's official privacy resources.</p>
+
+            <h3 class="policy-h3">Google Sign-In</h3>
+            <p>If Google Sign-In is enabled, authentication is handled using Google's authentication infrastructure.</p>
+
+            <h3 class="policy-h3">Google Gemini</h3>
+            <p>Google Gemini may be used to process submitted content and generate AI-assisted analysis.</p>
+
+            <h3 class="policy-h3">Google AdMob</h3>
+            <p>If advertisements are enabled, Google AdMob may be used to display advertisements. Advertising providers may process information such as advertising identifiers or device-related information according to their policies and applicable privacy choices.</p>
+
+            <h3 class="policy-h3"><i class="fa-brands fa-github text-white mr-1" aria-hidden="true"></i> GitHub</h3>
+            <p>The InfoSense website or application may access GitHub release information to identify and provide access to the latest publicly available application release.</p>
+
+            <div class="callout callout-neutral">
+              <i class="fa-solid fa-arrow-up-right-from-square mt-0.5" aria-hidden="true"></i>
+              <p>Third-party services operate under their own terms and privacy policies. Users should review the applicable policies of those providers.</p>
+            </div>
+          </section>
+
+          <!-- ===== 6. Data Sharing ===== -->
+          <section id="s6" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">6</span> Data Sharing</h2>
+            <p><strong class="text-white">We do not sell, rent, or trade your personal information for monetary gain.</strong></p>
+            <p>Information may nevertheless be processed by trusted service providers when necessary to operate InfoSense. Examples may include:</p>
+            <ul class="policy-list">
+              <li>Authentication providers</li>
+              <li>Cloud database providers</li>
+              <li>AI service providers</li>
+              <li>Analytics providers</li>
+              <li>Crash-reporting providers</li>
+              <li>Advertising providers</li>
+              <li>Hosting or infrastructure providers</li>
+            </ul>
+            <p>Information may also be disclosed when reasonably necessary to:</p>
+            <ul class="policy-list">
+              <li>Comply with applicable law</li>
+              <li>Respond to lawful requests</li>
+              <li>Protect the rights and safety of users</li>
+              <li>Detect or prevent fraud or abuse</li>
+              <li>Protect the security of our services</li>
+            </ul>
+          </section>
+
+          <!-- ===== 7. Data Storage ===== -->
+          <section id="s7" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">7</span> Data Storage</h2>
+            <p>Account-related information may be stored using cloud infrastructure such as Firebase/Google Cloud services.</p>
+            <p>We use reasonable technical and organizational measures intended to protect stored information from unauthorized access, alteration, disclosure, or destruction.</p>
+            <p>However, no online service can guarantee absolute security.</p>
+          </section>
+
+          <!-- ===== 8. Data Retention ===== -->
+          <section id="s8" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">8</span> Data Retention</h2>
+            <p>We retain information only for as long as reasonably necessary for the purposes described in this Privacy Policy, including:</p>
+            <ul class="policy-list">
+              <li>Providing the requested service</li>
+              <li>Maintaining an active account</li>
+              <li>Enforcing usage limits</li>
+              <li>Maintaining security</li>
+              <li>Meeting legitimate operational requirements</li>
+              <li>Complying with applicable legal obligations</li>
+            </ul>
+            <p>Retention periods may vary depending on the type of information and the purpose for which it is processed.</p>
+          </section>
+
+          <!-- ===== 9. Account & Data Deletion ===== -->
+          <section id="s9" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">9</span> Account and Data Deletion</h2>
+            <p>You may request deletion of your InfoSense account and associated personal information.</p>
+            <p>To request account deletion, contact:</p>
+            <a href="mailto:siriyalathaaththanayaka22@gmail.com"
+               class="inline-flex items-center gap-2 my-3 px-5 py-3 rounded-xl bg-surface border border-white/10
+                      hover:border-accent/50 text-white font-semibold text-sm transition">
+              <i class="fa-solid fa-envelope text-accent" aria-hidden="true"></i>
+              siriyalathaaththanayaka22@gmail.com
+            </a>
+            <p>When requesting deletion, please provide sufficient information for us to identify the relevant account.</p>
+            <p>We aim to process valid deletion requests within <strong class="text-success">7 working days</strong>, subject to technical, legal, security, or other legitimate retention requirements.</p>
+            <p>Some information may need to be retained where required by law or reasonably necessary for security, fraud prevention, dispute resolution, or other legitimate purposes.</p>
+          </section>
+
+          <!-- ===== 10. Children's Privacy ===== -->
+          <section id="s10" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">10</span> Children's Privacy</h2>
+            <p>InfoSense is not specifically directed toward children under the age of 13.</p>
+            <p>We do not knowingly collect personal information from children under 13.</p>
+            <p>If you believe that a child has provided personal information to InfoSense, please contact us so that appropriate steps can be taken.</p>
+            <p>Where local law establishes a different minimum age for online services or consent, the applicable legal requirement may apply.</p>
+          </section>
+
+          <!-- ===== 11. Advertising ===== -->
+          <section id="s11" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">11</span> Advertising and Personalization</h2>
+            <p>If advertisements are displayed through Google AdMob or another advertising provider, advertisements may be personalized or non-personalized depending on the provider's configuration, user settings, consent requirements, and applicable law.</p>
+            <p>Users may be able to control certain advertising or privacy settings through their device or the relevant advertising provider.</p>
+            <p>InfoSense does not directly control all information processed by third-party advertising networks.</p>
+          </section>
+
+          <!-- ===== 12. Cookies ===== -->
+          <section id="s12" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">12</span> Cookies and Local Storage</h2>
+            <p>The InfoSense website may use browser storage technologies, including local storage, to remember certain preferences and support website functionality. These may include:</p>
+            <ul class="policy-list">
+              <li>Theme preference</li>
+              <li>Interface preferences</li>
+              <li>Temporary settings</li>
+            </ul>
+            <p>If cookies, analytics, or additional tracking technologies are introduced, the relevant information will be reflected in an updated version of this Privacy Policy where required.</p>
+          </section>
+
+          <!-- ===== 13. Security ===== -->
+          <section id="s13" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">13</span> Security</h2>
+            <p>We use reasonable security measures designed to protect information handled by InfoSense. These may include:</p>
+            <ul class="policy-list">
+              <li>HTTPS/TLS encrypted connections</li>
+              <li>Firebase Authentication</li>
+              <li>Firebase Security Rules</li>
+              <li>Server-side authorization</li>
+              <li>Access controls</li>
+              <li>Secure API handling</li>
+              <li>Rate limiting and abuse prevention where implemented</li>
+            </ul>
+            <p>However, no method of electronic transmission or storage is completely secure. Therefore, we cannot guarantee absolute security.</p>
+          </section>
+
+          <!-- ===== 14. International Processing ===== -->
+          <section id="s14" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">14</span> International Data Processing</h2>
+            <p>Some third-party service providers used by InfoSense may process information on servers located outside your country of residence.</p>
+            <p>By using InfoSense, you acknowledge that information may be processed internationally where necessary to provide the service, subject to applicable laws and the privacy practices of the relevant service providers.</p>
+          </section>
+
+          <!-- ===== 15. Your Responsibilities ===== -->
+          <section id="s15" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">15</span> Your Responsibilities</h2>
+            <p>When using InfoSense, you should avoid submitting:</p>
+            <ul class="policy-list">
+              <li>Passwords</li>
+              <li>Payment-card information</li>
+              <li>Government identification numbers</li>
+              <li>Highly sensitive personal information</li>
+              <li>Confidential business information</li>
+              <li>Private information belonging to another person</li>
+            </ul>
+            <p>InfoSense is designed to analyze information, not to act as a secure storage system for confidential information.</p>
+          </section>
+
+          <!-- ===== 16. AI Verification Disclaimer ===== -->
+          <section id="s16" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">16</span> AI Verification Disclaimer</h2>
+            <p>InfoSense provides <strong class="text-white">AI-assisted information analysis</strong>, not guaranteed truth.</p>
+            <p>A result such as <span class="chip chip-success"><i class="fa-solid fa-check" aria-hidden="true"></i> TRUE</span> does not mean that InfoSense guarantees the claim is correct in every context.</p>
+            <p>Likewise, <span class="chip chip-danger"><i class="fa-solid fa-xmark" aria-hidden="true"></i> FALSE</span>, <span class="chip chip-warning"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> MISLEADING</span>, or <span class="chip chip-neutral"><i class="fa-solid fa-circle-question" aria-hidden="true"></i> UNVERIFIED</span> does not constitute a legal, professional, or authoritative determination.</p>
+            <p>Information can change over time, particularly in relation to breaking news and developing events. Users should review original sources and authoritative information before relying on a result.</p>
+          </section>
+
+          <!-- ===== 17. Changes ===== -->
+          <section id="s17" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">17</span> Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy when:</p>
+            <ul class="policy-list">
+              <li>New features are introduced</li>
+              <li>Third-party services change</li>
+              <li>Data-processing practices change</li>
+              <li>Security practices change</li>
+              <li>Legal or regulatory requirements change</li>
+            </ul>
+            <p>When changes are made, the <strong class="text-white">Last Updated</strong> date at the top of this document will be updated. For significant changes, additional notice may be provided through the application or website where appropriate.</p>
+          </section>
+
+          <!-- ===== 18. Contact ===== -->
+          <section id="s18" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">18</span> Contact Us</h2>
+            <p>If you have questions, concerns, privacy requests, or account deletion requests, please contact us.</p>
+            <div class="mt-4 grid sm:grid-cols-2 gap-3">
+              <div class="contact-item"><span>Developer</span><strong>PradeeTech</strong></div>
+              <div class="contact-item"><span>Application</span><strong>InfoSense</strong></div>
+              <div class="contact-item"><span>Android Package</span><strong>com.pradeetech.infosense</strong></div>
+              <div class="contact-item"><span>Email</span>
+                <a href="mailto:siriyalathaaththanayaka22@gmail.com" class="text-accent hover:text-indigo-400 break-all">
+                  siriyalathaaththanayaka22@gmail.com
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== 19. Summary ===== -->
+          <section id="s19" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">19</span> Summary</h2>
+            <p>InfoSense is designed to help users make more informed decisions about information they encounter online. We aim to:</p>
+            <ul class="policy-list">
+              <li>Minimize unnecessary data collection</li>
+              <li>Protect account information</li>
+              <li>Use trusted infrastructure</li>
+              <li>Clearly communicate AI limitations</li>
+              <li>Provide users with appropriate control over their information</li>
+              <li>Improve transparency around third-party services</li>
+            </ul>
+            <p>By using InfoSense, you acknowledge that AI-assisted verification is a supporting tool and should be combined with independent judgment and reliable sources.</p>
+          </section>
+
+          <!-- Bottom actions -->
+          <div class="flex flex-col sm:flex-row gap-3 pt-2 reveal">
+            <a href="terms.html" class="flex-1 text-center px-6 py-3.5 rounded-xl bg-surface border border-white/10
+               hover:border-accent/50 text-white font-semibold text-sm transition">
+              <i class="fa-solid fa-file-contract mr-2 text-accent" aria-hidden="true"></i> Terms &amp; Conditions
+            </a>
+            <a href="disclaimer.html" class="flex-1 text-center px-6 py-3.5 rounded-xl bg-surface border border-white/10
+               hover:border-accent/50 text-white font-semibold text-sm transition">
+              <i class="fa-solid fa-triangle-exclamation mr-2 text-warning" aria-hidden="true"></i> Disclaimer
+            </a>
+            <a href="mailto:siriyalathaaththanayaka22@gmail.com" class="flex-1 text-center px-6 py-3.5 rounded-xl
+               bg-accent hover:bg-indigo-500 text-white font-semibold text-sm transition shadow-lg shadow-accent/30">
+              <i class="fa-solid fa-envelope mr-2" aria-hidden="true"></i> Contact Us
+            </a>
+          </div>
+
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/10 bg-surface/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+
+        <!-- Brand -->
+        <div class="lg:col-span-2">
+          <a href="index.html" class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center">
+              <i class="fa-solid fa-magnifying-glass text-white text-sm" aria-hidden="true"></i>
+            </span>
+            <span class="font-display font-bold text-xl text-white">Info<span class="text-accent">Sense</span></span>
+          </a>
+          <p class="mt-3 text-sm text-slate-400 max-w-xs">Verify Before You Share.</p>
+          <p class="mt-4 text-xs text-slate-500">AI-assisted analysis for news, claims, and statements — in Sinhala &amp; English.</p>
+        </div>
+
+        <!-- Product -->
+        <nav aria-label="Product links">
+          <h3 class="footer-h">Product</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html#features" class="footer-link">Features</a></li>
+            <li><a href="index.html#how-it-works" class="footer-link">How It Works</a></li>
+            <li><a href="index.html#download" class="footer-link">Download</a></li>
+          </ul>
+        </nav>
+
+        <!-- Legal -->
+        <nav aria-label="Legal links">
+          <h3 class="footer-h">Legal</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="privacy.html" class="footer-link footer-link--active">Privacy Policy</a></li>
+            <li><a href="terms.html" class="footer-link">Terms &amp; Conditions</a></li>
+            <li><a href="disclaimer.html" class="footer-link">Disclaimer</a></li>
+          </ul>
+        </nav>
+
+        <!-- Support -->
+        <nav aria-label="Support links">
+          <h3 class="footer-h">Support</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="faq.html" class="footer-link">FAQ</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+            <li><a href="mailto:siriyalathaaththanayaka22@gmail.com" class="footer-link">Email Support</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <p>© 2026 Pradeetech. All rights reserved.</p>
+        <p>Made with <span class="text-danger" aria-hidden="true">❤️</span>
+           <span class="sr-only">love</span> for better information awareness.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="to-top" aria-label="Back to top"
+          class="fixed bottom-6 right-6 w-11 h-11 rounded-full bg-accent text-white shadow-lg shadow-accent/40
+                 opacity-0 pointer-events-none transition-all duration-300 hover:bg-indigo-500
+                 grid place-items-center z-40">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

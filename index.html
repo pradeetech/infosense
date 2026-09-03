@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============ SEO ============ -->
+  <title>InfoSense — AI-Powered News &amp; Fact Checking</title>
+  <meta name="description" content="InfoSense is an AI-assisted fact-checking app for Android. Analyze news, claims and statements in Sinhala & English and get easy-to-understand verdicts with a confidence score." />
+  <link rel="canonical" href="https://pradeetech.github.io/infosense/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="InfoSense" />
+  <meta property="og:title" content="InfoSense — Verify Before You Share" />
+  <meta property="og:description" content="AI-powered fact checking for news, claims and statements — in Sinhala & English." />
+  <meta property="og:url" content="https://pradeetech.github.io/infosense/" />
+  <meta property="og:image" content="assets/images/og-cover.png" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="InfoSense — Verify Before You Share" />
+  <meta name="twitter:description" content="AI-powered fact checking for news, claims and statements — in Sinhala & English." />
+  <meta name="twitter:image" content="assets/images/og-cover.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base:    '#0f172a',
+            surface: '#1e293b',
+            accent:  '#6366f1',
+            success: '#22c55e',
+            warning: '#f59e0b',
+            danger:  '#ef4444',
+          },
+          fontFamily: {
+            sans:    ['Inter', 'sans-serif'],
+            display: ['Poppins', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Structured data (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "InfoSense",
+    "operatingSystem": "Android",
+    "applicationCategory": "NewsApplication",
+    "description": "AI-assisted fact-checking app for news, claims and statements in Sinhala and English.",
+    "author": { "@type": "Organization", "name": "Pradeetech" },
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <!-- Shared styles (existing — no changes) -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- ============ index.html PAGE-SPECIFIC STYLES ============
+       (style.css එකට කිසිසේත් touch කරලා නෑ — මේවා මේ page එකට විතරයි) -->
+  <style>
+    /* Phone mockup frame */
+    .phone-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 19.5;
+      border-radius: 2.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: #0b1120;
+      box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.7),
+                  inset 0 0 0 6px #0b1120,
+                  inset 0 0 0 7px rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+    .phone-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .phone-frame::after {           /* notch */
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 34%;
+      height: 18px;
+      border-radius: 999px;
+      background: #0b1120;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Floating verdict chips */
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+    .float-anim   { animation: floaty 5s ease-in-out infinite; }
+    .float-anim-2 { animation: floaty 6.5s ease-in-out infinite; animation-delay: .8s; }
+    .float-anim-3 { animation: floaty 7.5s ease-in-out infinite; animation-delay: 1.6s; }
+
+    /* Screenshot placeholder tile */
+    .shot-placeholder {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .shot-placeholder > p {
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+      border-radius: 0.9rem;
+      padding: 1rem;
+      font-size: 0.7rem;
+      color: #64748b;
+      line-height: 1.6;
+      word-break: break-all;
+    }
+  </style>
+</head>
+
+<body class="bg-base text-slate-300 font-sans antialiased">
+
+  <!-- Skip link -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Scroll progress bar -->
+  <div id="progress-bar" role="presentation"></div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="fixed top-0 inset-x-0 z-50 glass">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+      <div class="flex items-center justify-between h-16">
+
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center shadow-lg shadow-accent/30">
+            <i class="fa-solid fa-magnifying-glass text-white text-sm" aria-hidden="true"></i>
+          </span>
+          <span class="font-display font-bold text-xl text-white tracking-tight">
+            Info<span class="text-accent">Sense</span>
+          </span>
+        </a>
+
+        <!-- Desktop nav -->
+        <ul class="hidden lg:flex items-center gap-7 text-sm font-medium">
+          <li><a href="index.html"              class="nav-link nav-link--active" aria-current="page">Home</a></li>
+          <li><a href="index.html#features"     class="nav-link">Features</a></li>
+          <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="index.html#screenshots"  class="nav-link">Screenshots</a></li>
+          <li><a href="about.html"              class="nav-link">About</a></li>
+          <li><a href="faq.html"                class="nav-link">FAQ</a></li>
+          <li><a href="privacy.html"            class="nav-link">Privacy</a></li>
+          <li><a href="contact.html"            class="nav-link">Contact</a></li>
+        </ul>
+
+        <!-- CTA + hamburger -->
+        <div class="flex items-center gap-3">
+          <a href="#download"
+             class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+                    bg-accent hover:bg-indigo-500 text-white text-sm font-semibold
+                    transition-all duration-200 hover:-translate-y-0.5 shadow-lg shadow-accent/30">
+            <i class="fa-solid fa-download text-xs" aria-hidden="true"></i>
+            Download App
+          </a>
+          <button id="menu-btn" class="lg:hidden w-10 h-10 grid place-items-center rounded-lg
+                 text-slate-300 hover:text-white hover:bg-white/10 transition"
+                 aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <i class="fa-solid fa-bars text-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden lg:hidden pb-4" aria-label="Mobile navigation">
+        <ul class="flex flex-col gap-1 text-sm font-medium pt-2 border-t border-white/10">
+          <li><a href="index.html"              class="mobile-link mobile-link--active" aria-current="page">Home</a></li>
+          <li><a href="index.html#features"     class="mobile-link">Features</a></li>
+          <li><a href="index.html#how-it-works" class="mobile-link">How It Works</a></li>
+          <li><a href="index.html#screenshots"  class="mobile-link">Screenshots</a></li>
+          <li><a href="about.html"              class="mobile-link">About</a></li>
+          <li><a href="faq.html"                class="mobile-link">FAQ</a></li>
+          <li><a href="privacy.html"            class="mobile-link">Privacy Policy</a></li>
+          <li><a href="terms.html"              class="mobile-link">Terms &amp; Conditions</a></li>
+          <li><a href="contact.html"            class="mobile-link">Contact</a></li>
+          <li class="pt-2">
+            <a href="#download" class="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent text-white font-semibold">
+              <i class="fa-solid fa-download" aria-hidden="true"></i> Download App
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main id="main" class="pt-16">
+
+    <!-- ============ HERO ============ -->
+    <section class="relative overflow-hidden">
+      <!-- Glow decorations -->
+      <div class="absolute -top-40 left-1/4 w-[28rem] h-[28rem] bg-accent/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute top-40 -right-24 w-96 h-96 bg-indigo-800/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
+        <div class="grid lg:grid-cols-2 gap-14 lg:gap-10 items-center">
+
+          <!-- Left: copy -->
+          <div class="text-center lg:text-left reveal">
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30
+                         text-accent text-xs font-semibold tracking-wide mb-6">
+              <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+              AI-Powered • Sinhala &amp; English • Easy to Use
+            </span>
+
+            <h1 class="font-display text-4xl sm:text-5xl xl:text-6xl font-bold text-white leading-[1.1] tracking-tight">
+              Verify Before<br class="hidden sm:block" />
+              You <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-indigo-400">Share.</span>
+            </h1>
+
+            <p class="mt-5 text-lg text-slate-300 font-medium">
+              Meet InfoSense — your AI-powered companion for understanding
+              and checking news, claims and information.
+            </p>
+
+            <p class="mt-4 text-slate-400 leading-relaxed max-w-xl mx-auto lg:mx-0">
+              Paste a claim, statement or piece of news — InfoSense analyzes it using AI
+              and gives you an easy-to-understand result with a clear verdict and explanation.
+            </p>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+              <a href="#download"
+                 class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full
+                        bg-accent hover:bg-indigo-500 text-white font-semibold
+                        transition-all duration-200 hover:-translate-y-0.5 shadow-lg shadow-accent/40">
+                <i class="fa-solid fa-download" aria-hidden="true"></i>
+                Download InfoSense
+              </a>
+              <a href="#how-it-works"
+                 class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full
+                        bg-surface border border-white/10 hover:border-accent/50 text-white font-semibold
+                        transition-all duration-200 hover:-translate-y-0.5">
+                Learn More
+                <i class="fa-solid fa-arrow-down text-xs text-accent" aria-hidden="true"></i>
+              </a>
+            </div>
+
+            <p class="mt-6 text-xs text-slate-500 flex items-center gap-2 justify-center lg:justify-start">
+              <i class="fa-solid fa-robot text-accent" aria-hidden="true"></i>
+              AI-assisted analysis — results can contain errors. Verify important information independently.
+            </p>
+          </div>
+
+          <!-- Right: phone mockup -->
+          <div class="relative max-w-[290px] sm:max-w-[320px] mx-auto reveal">
+            <div class="phone-frame">
+              <img id="hero-phone-img"
+                   src="assets/screenshots/home.png"
+                   alt="InfoSense app home screen"
+                   loading="eager"
+                   onerror="this.style.display='none';document.getElementById('hero-phone-fallback').style.display='grid';" />
+              <div id="hero-phone-fallback" class="shot-placeholder" style="display:none;">
+                <p>[ADD APP SCREENSHOT]<br />assets/screenshots/home.png</p>
+              </div>
+            </div>
+
+            <!-- Floating sample verdict chips (illustrative only) -->
+            <span class="chip chip-success float-anim   absolute -left-10 top-16 hidden sm:inline-flex shadow-lg" aria-hidden="true">TRUE</span>
+            <span class="chip chip-danger  float-anim-2 absolute -right-8 top-40 hidden sm:inline-flex shadow-lg" aria-hidden="true">FALSE</span>
+            <span class="chip chip-warning float-anim-3 absolute -left-8 bottom-28 hidden sm:inline-flex shadow-lg" aria-hidden="true">MISLEADING</span>
+            <span class="chip chip-neutral float-anim-2 absolute -right-4 bottom-10 hidden sm:inline-flex shadow-lg" aria-hidden="true">UNVERIFIED</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto reveal">
+          <span class="text-accent text-xs font-bold tracking-[0.2em] uppercase">Features</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">
+            Everything You Need to <span class="text-accent">Check Information</span>
+          </h2>
+          <p class="mt-4 text-slate-400">
+            Simple tools that help you understand information before deciding to share it.
+          </p>
+        </div>
+
+        <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+          <!-- 🔎 AI Verification -->
+          <div class="feature-card reveal">
+            <span class="feature-icon"><i class="fa-solid fa-magnifying-glass-chart" aria-hidden="true"></i></span>
+            <h3>AI-Powered Verification</h3>
+            <p>Analyze submitted claims and information using AI.</p>
+          </div>
+
+          <!-- 🇱🇰 Sinhala -->
+          <div class="feature-card reveal">
+            <span class="feature-icon"><i class="fa-solid fa-language" aria-hidden="true"></i></span>
+            <h3>Sinhala Support</h3>
+            <p>Designed to provide useful analysis for Sinhala-speaking users.</p>
+          </div>
+
+          <!-- 🌍 English -->
+          <div class="feature-card reveal">
+            <span class="feature-icon"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
+            <h3>English Support</h3>
+            <p>Users can also submit and analyze English content.</p>
+          </div>
+
+          <!-- 📊 Verdicts -->
+          <div class="feature-card reveal">
+            <span class="feature-icon"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></span>
+            <h3>Clear Verdicts</h3>
+            <p>Results use easy categories: TRUE, FALSE, MISLEADING or UNVERIFIED.</p>
+          </div>
+
+          <!-- 📈 Confidence -->
+          <div class="feature-card reveal">
+            <span class="feature-icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></span>
+            <h3>Confidence Score</h3>
+            <p>An estimated score shows how strongly the system supports its assessment.</p>
+          </div>
+
+          <!-- 🔐 Privacy -->
+          <div class="feature-card reveal">
+            <span class="feature-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+            <h3>Privacy-Focused</h3>
+            <p>A clear privacy approach — read how your data is handled in our
+               <a href="privacy.html" class="text-accent hover:underline">Privacy Policy</a>.</p>
+          </div>
+
+          <!-- ⚡ Simple -->
+          <div class="feature-card reveal">
+            <span class="feature-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
+            <h3>Simple Interface</h3>
+            <p>Paste a claim, analyze it, understand the result.</p>
+          </div>
+
+          <!-- 🆓 Free tier (visible in app: "Daily Limit 5/5" + premium "Unlimited Daily Checks") -->
+          <div class="feature-card reveal">
+            <span class="feature-icon"><i class="fa-solid fa-gift" aria-hidden="true"></i></span>
+            <h3>Free Daily Checks</h3>
+            <p>Start with a free daily limit. Upgrade to premium for unlimited daily checks.</p>
+          </div>
+
+          <!-- ⭐ OPTIONAL: App එකේ Verification History feature එක තියෙනවා නම්
+               මේ card එක uncomment කරන්න:
+          <div class="feature-card reveal">
+            <span class="feature-icon"><i class="fa-solid fa-clock-rotate-left"></i></span>
+            <h3>Verification History</h3>
+            <p>Review your previous checks anytime.</p>
+          </div>
+          -->
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section id="how-it-works" class="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto reveal">
+          <span class="text-accent text-xs font-bold tracking-[0.2em] uppercase">How It Works</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">
+            Four Simple Steps
+          </h2>
+        </div>
+
+        <ol class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 list-none">
+          <li class="step-card reveal">
+            <span class="step-num">01</span>
+            <span class="step-icon"><i class="fa-solid fa-paste" aria-hidden="true"></i></span>
+            <h3>Submit</h3>
+            <p>Paste a news article, statement or claim.</p>
+          </li>
+          <li class="step-card reveal">
+            <span class="step-num">02</span>
+            <span class="step-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></span>
+            <h3>Analyze</h3>
+            <p>InfoSense processes the submitted information using its AI verification system.</p>
+          </li>
+          <li class="step-card reveal">
+            <span class="step-num">03</span>
+            <span class="step-icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></span>
+            <h3>Review</h3>
+            <p>Receive a structured result with a verdict and confidence score.</p>
+          </li>
+          <li class="step-card reveal">
+            <span class="step-num">04</span>
+            <span class="step-icon"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i></span>
+            <h3>Understand</h3>
+            <p>Read the explanation before deciding whether to share the information.</p>
+          </li>
+        </ol>
+
+        <!-- AI limitation note (required) -->
+        <div class="callout callout-accent max-w-3xl mx-auto mt-10 reveal">
+          <i class="fa-solid fa-robot mt-0.5" aria-hidden="true"></i>
+          <p>AI-generated verification can make mistakes. Users should consider reliable sources
+             and use their own judgment, especially for important or sensitive claims.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SCREENSHOTS ============ -->
+    <section id="screenshots" class="py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto reveal">
+          <span class="text-accent text-xs font-bold tracking-[0.2em] uppercase">Screenshots</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">
+            Explore <span class="text-accent">InfoSense</span>
+          </h2>
+          <p class="mt-4 text-slate-400">A quick look inside the app.</p>
+        </div>
+
+        <!-- Gallery — js/config.js එකෙන් auto-render වෙනවා -->
+        <div id="screenshot-gallery"
+             class="mt-12 flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0"
+             aria-label="App screenshot gallery">
+          <!-- JS renders cards here; if config empty, fallback below -->
+          <noscript>
+            <p class="text-slate-500 text-sm">Screenshots require JavaScript. You can also view them in the app itself.</p>
+          </noscript>
+        </div>
+
+        <p class="mt-2 text-center text-xs text-slate-500">
+          <i class="fa-solid fa-hand-pointer text-accent mr-1" aria-hidden="true"></i>
+          Tap a screenshot to view it larger.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ DOWNLOAD ============ -->
+    <section id="download" class="py-20 px-4 sm:px-6 lg:px-8 bg-surface/30">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto reveal">
+          <span class="text-accent text-xs font-bold tracking-[0.2em] uppercase">Download</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">
+            Get <span class="text-accent">InfoSense</span>
+          </h2>
+          <p class="mt-4 text-slate-400">
+            Download the latest version of InfoSense and start checking information
+            before you share it.
+          </p>
+        </div>
+
+        <div class="mt-12 grid lg:grid-cols-2 gap-6 items-stretch">
+
+          <!-- Release card -->
+          <div class="policy-card flex flex-col justify-center reveal">
+            <p class="text-xs uppercase tracking-widest text-slate-500 font-semibold">Latest Version</p>
+            <p id="release-version" class="font-display text-5xl font-bold text-white mt-2">…</p>
+            <p id="release-date" class="text-sm text-slate-400 mt-2">
+              <i class="fa-regular fa-calendar mr-1" aria-hidden="true"></i>Fetching release info…
+            </p>
+            <p id="release-file" class="text-xs text-slate-500 mt-1 break-all"></p>
+
+            <div class="mt-6 flex flex-col sm:flex-row gap-3">
+              <a id="download-apk-btn"
+                 href="https://github.com/pradeetech/infosense/releases"
+                 class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full
+                        bg-accent hover:bg-indigo-500 text-white font-semibold transition
+                        hover:-translate-y-0.5 shadow-lg shadow-accent/40">
+                <i class="fa-brands fa-android text-lg" aria-hidden="true"></i>
+                Download APK
+              </a>
+              <a id="view-release-btn"
+                 href="https://github.com/pradeetech/infosense/releases"
+                 class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full
+                        bg-transparent border border-white/15 hover:border-accent/50 text-white
+                        font-semibold transition hover:-translate-y-0.5">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+                View Latest Release
+              </a>
+            </div>
+
+            <p id="release-status" class="text-xs text-slate-500 mt-4" role="status" aria-live="polite">
+              <i class="fa-solid fa-circle-notch fa-spin text-accent" aria-hidden="true"></i>
+              Checking for the latest release…
+            </p>
+          </div>
+
+          <!-- App info + What's New -->
+          <div class="space-y-6">
+            <div class="policy-card reveal">
+              <h3 class="font-display text-lg font-semibold text-white mb-4">
+                <i class="fa-solid fa-circle-info text-accent mr-2" aria-hidden="true"></i>App Information
+              </h3>
+              <dl class="grid grid-cols-2 gap-3 text-sm">
+                <div class="info-item"><dt>App Name</dt><dd>InfoSense</dd></div>
+                <div class="info-item"><dt>Package</dt><dd class="break-all">com.pradeetech.infosense</dd></div>
+                <div class="info-item"><dt>Platform</dt><dd>Android</dd></div>
+                <div class="info-item"><dt>Languages</dt><dd>Sinhala / English</dd></div>
+                <div class="info-item"><dt>Category</dt><dd>News &amp; Information</dd></div>
+                <div class="info-item"><dt>Developer</dt><dd>Pradeetech</dd></div>
+              </dl>
+            </div>
+
+            <!-- What's New — GitHub release notes ආවම විතරයි පේන්නේ -->
+            <div id="whats-new" class="policy-card hidden reveal">
+              <h3 class="font-display text-lg font-semibold text-white mb-3">
+                <i class="fa-solid fa-wand-magic-sparkles text-accent mr-2" aria-hidden="true"></i>What's New
+              </h3>
+              <div id="release-notes" class="text-sm text-slate-400 leading-relaxed space-y-2"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Disclaimer near download (required) -->
+        <div class="callout callout-warning max-w-3xl mx-auto mt-10 reveal">
+          <i class="fa-solid fa-triangle-exclamation mt-0.5" aria-hidden="true"></i>
+          <p>InfoSense uses AI-assisted analysis and results may contain errors.
+             Read our full <a href="disclaimer.html" class="underline font-semibold">Disclaimer</a>
+             and <a href="privacy.html" class="underline font-semibold">Privacy Policy</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ PREVIEW ============ -->
+    <section id="faq-preview" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center reveal">
+          <span class="text-accent text-xs font-bold tracking-[0.2em] uppercase">FAQ</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">
+            Common Questions
+          </h2>
+        </div>
+
+        <div class="mt-10 space-y-3">
+          <details class="faq-item reveal">
+            <summary>What is InfoSense?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+            <p>InfoSense is an AI-assisted information and fact-checking app for Android.
+               You paste a claim, statement or piece of news, and InfoSense returns an
+               easy-to-understand result — such as TRUE, FALSE, MISLEADING or UNVERIFIED —
+               with an explanation and a confidence score.</p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Does InfoSense support Sinhala &amp; English?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+            <p>Yes. InfoSense is designed to provide useful analysis for Sinhala-speaking users,
+               and English content is supported as well.</p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Is InfoSense always accurate?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+            <p>No. InfoSense uses AI-assisted analysis, and AI can make mistakes. Results should
+               be combined with your own judgment and reliable sources — especially for
+               important or sensitive decisions.</p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Is InfoSense free?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+            <p>InfoSense offers free daily checks with a usage limit, and a premium upgrade for
+               unlimited daily checks and an ad-free experience.</p>
+          </details>
+        </div>
+
+        <div class="text-center mt-8 reveal">
+          <a href="faq.html" class="inline-flex items-center gap-2 text-accent font-semibold hover:text-indigo-400 transition">
+            View all questions <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/10 bg-surface/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+
+        <!-- Brand -->
+        <div class="lg:col-span-2">
+          <a href="index.html" class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center">
+              <i class="fa-solid fa-magnifying-glass text-white text-sm" aria-hidden="true"></i>
+            </span>
+            <span class="font-display font-bold text-xl text-white">Info<span class="text-accent">Sense</span></span>
+          </a>
+          <p class="mt-3 text-sm text-slate-400 max-w-xs">Verify Before You Share.</p>
+          <p class="mt-4 text-xs text-slate-500">AI-assisted analysis for news, claims, and statements — in Sinhala &amp; English.</p>
+        </div>
+
+        <!-- Product -->
+        <nav aria-label="Product links">
+          <h3 class="footer-h">Product</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html#features"     class="footer-link">Features</a></li>
+            <li><a href="index.html#how-it-works" class="footer-link">How It Works</a></li>
+            <li><a href="index.html#download"     class="footer-link">Download</a></li>
+          </ul>
+        </nav>
+
+        <!-- Legal -->
+        <nav aria-label="Legal links">
+          <h3 class="footer-h">Legal</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="privacy.html"   class="footer-link">Privacy Policy</a></li>
+            <li><a href="terms.html"     class="footer-link">Terms &amp; Conditions</a></li>
+            <li><a href="disclaimer.html" class="footer-link">Disclaimer</a></li>
+          </ul>
+        </nav>
+
+        <!-- Support -->
+        <nav aria-label="Support links">
+          <h3 class="footer-h">Support</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="faq.html"     class="footer-link">FAQ</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+            <li><a href="mailto:siriyalathaaththanayaka22@gmail.com" class="footer-link">Email Support</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <p>© 2026 Pradeetech. All rights reserved.</p>
+        <p>Made with <span class="text-danger" aria-hidden="true">❤️</span>
+           <span class="sr-only">love</span> for better information awareness.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ LIGHTBOX (screenshots) ============ -->
+  <div id="lightbox" class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/85 backdrop-blur-sm p-4"
+       role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+    <button id="lb-close" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20
+            text-white grid place-items-center transition" aria-label="Close viewer">
+      <i class="fa-solid fa-xmark text-lg" aria-hidden="true"></i>
+    </button>
+    <button id="lb-prev" class="absolute left-3 sm:left-8 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20
+            text-white grid place-items-center transition" aria-label="Previous screenshot">
+      <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+    </button>
+    <button id="lb-next" class="absolute right-3 sm:right-8 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20
+            text-white grid place-items-center transition" aria-label="Next screenshot">
+      <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+    </button>
+
+    <figure class="max-w-[280px] sm:max-w-[320px] w-full text-center">
+      <div class="phone-frame mx-auto">
+        <img id="lb-img" src="" alt="" />
+      </div>
+      <figcaption class="mt-4">
+        <p id="lb-title" class="font-display font-semibold text-white"></p>
+        <p id="lb-desc" class="text-sm text-slate-400 mt-1"></p>
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- Back to top -->
+  <button id="to-top" aria-label="Back to top"
+          class="fixed bottom-6 right-6 w-11 h-11 rounded-full bg-accent text-white shadow-lg shadow-accent/40
+                 opacity-0 pointer-events-none transition-all duration-300 hover:bg-indigo-500
+                 grid place-items-center z-40">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- ============ SCRIPTS (order matters: config → release → shared app) ============ -->
+  <script src="js/config.js"></script>
+  <script src="js/github-release.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Screenshot gallery + lightbox (page-specific — config.js එකෙන් render වෙනවා) -->
+  <script>
+    (function () {
+      "use strict";
+      var cfg = window.INFOSENSE_CONFIG;
+      var gallery = document.getElementById("screenshot-gallery");
+      if (!cfg || !gallery || !cfg.appScreenshots || !cfg.appScreenshots.length) return;
+
+      /* ---- Lightbox elements ---- */
+      var lb      = document.getElementById("lightbox");
+      var lbImg   = document.getElementById("lb-img");
+      var lbTitle = document.getElementById("lb-title");
+      var lbDesc  = document.getElementById("lb-desc");
+      var current = 0;
+
+      function show(i) {
+        current = (i + cfg.appScreenshots.length) % cfg.appScreenshots.length;
+        var s = cfg.appScreenshots[current];
+        lbImg.src = s.image;
+        lbImg.alt = s.title + " — InfoSense app screen";
+        lbTitle.textContent = s.title;
+        lbDesc.textContent  = s.description || "";
+      }
+      function openLb(i)  { show(i); lb.classList.remove("hidden"); lb.classList.add("flex"); document.body.style.overflow = "hidden"; }
+      function closeLb()  { lb.classList.add("hidden"); lb.classList.remove("flex"); document.body.style.overflow = ""; }
+
+      document.getElementById("lb-close").addEventListener("click", closeLb);
+      document.getElementById("lb-prev").addEventListener("click", function () { show(current - 1); });
+      document.getElementById("lb-next").addEventListener("click", function () { show(current + 1); });
+      lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
+      document.addEventListener("keydown", function (e) {
+        if (lb.classList.contains("hidden")) return;
+        if (e.key === "Escape")     closeLb();
+        if (e.key === "ArrowLeft")  show(current - 1);
+        if (e.key === "ArrowRight") show(current + 1);
+      });
+
+      /* ---- Render gallery cards ---- */
+      cfg.appScreenshots.forEach(function (s, i) {
+        var card = document.createElement("figure");
+        card.className = "snap-center shrink-0 w-[240px] sm:w-[270px] cursor-zoom-in group";
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-label", "Open screenshot: " + s.title);
+
+        var frame = document.createElement("div");
+        frame.className = "phone-frame transition-transform duration-300 group-hover:-translate-y-1.5";
+
+        var img = document.createElement("img");
+        img.src = s.image;
+        img.alt = s.title + " — InfoSense app screen";
+        img.loading = "lazy";
+
+        var ph = document.createElement("div");
+        ph.className = "shot-placeholder";
+        ph.innerHTML = "<p>[ADD APP SCREENSHOT]<br>" + s.image + "</p>";
+        img.addEventListener("error", function () {
+          img.style.display = "none";
+          ph.style.display = "grid";
+        });
+
+        frame.appendChild(img);
+        frame.appendChild(ph);
+
+        var cap = document.createElement("figcaption");
+        cap.className = "mt-3 text-center";
+        cap.innerHTML = '<p class="text-sm font-semibold text-white">' + s.title + "</p>" +
+                        (s.description ? '<p class="text-xs text-slate-500 mt-0.5">' + s.description + "</p>" : "");
+
+        card.appendChild(frame);
+        card.appendChild(cap);
+
+        function activate() { openLb(i); }
+        card.addEventListener("click", activate);
+        card.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activate(); }
+        });
+
+        gallery.appendChild(card);
+      });
+    })();
+  </script>
+</body>
+</html>

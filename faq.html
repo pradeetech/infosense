@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>FAQ | InfoSense — AI-Powered News &amp; Fact Checking</title>
+  <meta name="description" content="Frequently asked questions about InfoSense — how the AI verification works, Sinhala & English support, free daily checks, premium features, and more." />
+  <link rel="canonical" href="https://pradeetech.github.io/infosense/faq.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="FAQ | InfoSense" />
+  <meta property="og:description" content="Answers to common questions about the InfoSense fact-checking app." />
+  <meta property="og:url" content="https://pradeetech.github.io/infosense/faq.html" />
+  <meta property="og:image" content="assets/images/og-cover.png" />
+
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: '#0f172a', surface: '#1e293b', accent: '#6366f1',
+            success: '#22c55e', warning: '#f59e0b', danger: '#ef4444',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Poppins', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- FAQ page-specific styles (style.css එකට touch නැතුව මෙතනම) -->
+  <style>
+    .faq-search {
+      width: 100%;
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 14px 18px 14px 46px;
+      color: #e2e8f0;
+      font-size: 0.925rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .faq-search::placeholder { color: #64748b; }
+    .faq-search:focus {
+      outline: none;
+      border-color: rgba(99,102,241,0.6);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+    }
+
+    .faq-item {
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+    .faq-item:hover { border-color: rgba(99,102,241,0.35); }
+    .faq-item[open] { border-color: rgba(99,102,241,0.5); }
+
+    .faq-item summary {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 22px;
+      cursor: pointer;
+      list-style: none;
+      font-weight: 600;
+      color: #f1f5f9;
+      font-size: 0.95rem;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+
+    .faq-item summary i {
+      margin-left: auto;
+      flex-shrink: 0;
+      color: #6366f1;
+      font-size: 0.8rem;
+      transition: transform 0.25s;
+    }
+    .faq-item[open] summary i { transform: rotate(180deg); }
+
+    .faq-item .faq-a {
+      padding: 0 22px 20px;
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #94a3b8;
+    }
+    .faq-item .faq-a a { color: #a5b4fc; }
+    .faq-item .faq-a a:hover { text-decoration: underline; }
+  </style>
+</head>
+
+<body class="bg-base text-slate-300 font-sans antialiased">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="progress-bar" role="presentation"></div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="fixed top-0 inset-x-0 z-50 glass">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center shadow-lg shadow-accent/30">
+            <i class="fa-solid fa-magnifying-glass text-white text-sm" aria-hidden="true"></i>
+          </span>
+          <span class="font-display font-bold text-xl text-white tracking-tight">Info<span class="text-accent">Sense</span></span>
+        </a>
+
+        <ul class="hidden lg:flex items-center gap-7 text-sm font-medium">
+          <li><a href="index.html"              class="nav-link">Home</a></li>
+          <li><a href="index.html#features"     class="nav-link">Features</a></li>
+          <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="index.html#screenshots"  class="nav-link">Screenshots</a></li>
+          <li><a href="about.html"              class="nav-link">About</a></li>
+          <li><a href="faq.html"                class="nav-link nav-link--active" aria-current="page">FAQ</a></li>
+          <li><a href="privacy.html"            class="nav-link">Privacy</a></li>
+          <li><a href="contact.html"            class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center gap-3">
+          <a href="index.html#download"
+             class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+                    bg-accent hover:bg-indigo-500 text-white text-sm font-semibold
+                    transition-all duration-200 hover:-translate-y-0.5 shadow-lg shadow-accent/30">
+            <i class="fa-solid fa-download text-xs" aria-hidden="true"></i> Download App
+          </a>
+          <button id="menu-btn" class="lg:hidden w-10 h-10 grid place-items-center rounded-lg
+                 text-slate-300 hover:text-white hover:bg-white/10 transition"
+                 aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <i class="fa-solid fa-bars text-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="hidden lg:hidden pb-4" aria-label="Mobile navigation">
+        <ul class="flex flex-col gap-1 text-sm font-medium pt-2 border-t border-white/10">
+          <li><a href="index.html"              class="mobile-link">Home</a></li>
+          <li><a href="index.html#features"     class="mobile-link">Features</a></li>
+          <li><a href="index.html#how-it-works" class="mobile-link">How It Works</a></li>
+          <li><a href="index.html#screenshots"  class="mobile-link">Screenshots</a></li>
+          <li><a href="about.html"              class="mobile-link">About</a></li>
+          <li><a href="faq.html"                class="mobile-link mobile-link--active" aria-current="page">FAQ</a></li>
+          <li><a href="privacy.html"            class="mobile-link">Privacy Policy</a></li>
+          <li><a href="terms.html"              class="mobile-link">Terms &amp; Conditions</a></li>
+          <li><a href="contact.html"            class="mobile-link">Contact</a></li>
+          <li class="pt-2">
+            <a href="index.html#download" class="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent text-white font-semibold">
+              <i class="fa-solid fa-download" aria-hidden="true"></i> Download App
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main id="main" class="pt-16">
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden pt-16 pb-10 px-4 sm:px-6 lg:px-8">
+      <div class="absolute -top-32 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="relative max-w-3xl mx-auto text-center reveal">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30
+                     text-accent text-xs font-semibold tracking-wide uppercase mb-5">
+          <i class="fa-solid fa-circle-question" aria-hidden="true"></i> Help Center
+        </span>
+        <h1 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">
+          Frequently Asked <span class="text-accent">Questions</span>
+        </h1>
+        <p class="mt-4 text-slate-400">
+          Everything you need to know about InfoSense.
+        </p>
+      </div>
+    </section>
+
+    <!-- Search + List -->
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+
+      <!-- Search -->
+      <div class="relative reveal">
+        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm" aria-hidden="true"></i>
+        <label for="faq-search" class="sr-only">Search questions</label>
+        <input type="search" id="faq-search" class="faq-search"
+               placeholder="Search questions… e.g. Sinhala, premium, accuracy" autocomplete="off" />
+      </div>
+
+      <!-- Controls -->
+      <div class="flex items-center justify-between mt-4 text-xs reveal">
+        <p id="faq-count" class="text-slate-500" role="status" aria-live="polite"></p>
+        <div class="flex gap-2">
+          <button id="faq-expand" class="px-3 py-1.5 rounded-lg bg-surface border border-white/10 hover:border-accent/50 text-slate-300 transition">
+            Expand all
+          </button>
+          <button id="faq-collapse" class="px-3 py-1.5 rounded-lg bg-surface border border-white/10 hover:border-accent/50 text-slate-300 transition">
+            Collapse all
+          </button>
+        </div>
+      </div>
+
+      <!-- FAQ list -->
+      <div id="faq-list" class="mt-6 space-y-3">
+
+        <details class="faq-item reveal">
+          <summary>What is InfoSense?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            InfoSense is an AI-assisted information and fact-checking app for Android.
+            You paste a claim, statement or piece of news, and InfoSense returns an
+            easy-to-understand result — such as TRUE, FALSE, MISLEADING or UNVERIFIED —
+            with an explanation and an estimated confidence score.
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>How does InfoSense verify information?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            When you submit a claim, it is processed by an AI verification system (using
+            services such as Google Gemini) which analyzes the content and generates a
+            structured result with a verdict, confidence score, summary and key evidence
+            points. Because this is AI-assisted analysis, results can contain errors —
+            see our <a href="disclaimer.html">Disclaimer</a>.
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>Does InfoSense support Sinhala?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            Yes. InfoSense is designed to provide useful analysis for Sinhala-speaking
+            users, and you can submit claims directly in Sinhala.
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>Does InfoSense support English?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            Yes. English content is fully supported — you can submit and analyze claims
+            in English as well.
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>Is InfoSense always accurate?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            No. InfoSense uses AI-assisted analysis, and AI can make mistakes. Results may
+            be incomplete, outdated or incorrect. Always use your own judgment and reliable
+            sources — especially for important or sensitive decisions. Read more in our
+            <a href="disclaimer.html">Disclaimer</a>.
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>Can I check social-media posts?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            Yes — copy the text of the post and paste it into the app for analysis.
+            Please only submit content you have the right to share, and avoid including
+            other people's private information.
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>Can I check news articles?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            Yes. You can paste the article text directly, or use the <strong>Analyze a Link</strong>
+            feature to submit an article link — InfoSense will analyze it and show signals
+            such as source credibility, bias detection and misinformation risk.
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>Does InfoSense store my searches?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            Submitted content may be processed by our backend systems and third-party AI
+            services to provide the verification functionality. Usage information such as
+            the number of verification requests and daily usage count may also be processed
+            to enforce limits and improve the app. Full details are in our
+            <a href="privacy.html">Privacy Policy</a>.
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>Is InfoSense free?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            Yes. InfoSense offers free daily checks with a usage limit. You can start
+            using the app for free and upgrade anytime if you need more.
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>Is there a premium version?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            Yes. InfoSense Premium unlocks unlimited daily checks, an ad-free experience
+            and priority access to the AI engine. You can upgrade from within the app.
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>How can I download the app?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            Use the <a href="index.html#download">Download</a> section on this website —
+            it automatically fetches the latest release and gives you the APK file.
+            You can also visit the
+            <a href="https://github.com/pradeetech/infosense/releases" rel="noopener" target="_blank">GitHub Releases</a>
+            page directly.
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>Where can I report a problem?<i class="fa-solid fa-chevron-down" aria-hidden="true"></i></summary>
+          <div class="faq-a">
+            You can email us at
+            <a href="mailto:siriyalathaaththanayaka22@gmail.com">siriyalathaaththanayaka22@gmail.com</a>
+            or open an issue on our
+            <a href="https://github.com/pradeetech/infosense/issues" rel="noopener" target="_blank">GitHub Issues</a>
+            page. See the <a href="contact.html">Contact</a> page for more options.
+          </div>
+        </details>
+
+      </div>
+
+      <!-- No results -->
+      <div id="faq-no-results" class="hidden text-center py-12">
+        <i class="fa-solid fa-magnifying-glass text-3xl text-slate-600" aria-hidden="true"></i>
+        <p class="mt-4 text-slate-400 font-medium">No matching questions found.</p>
+        <p class="mt-1 text-sm text-slate-500">
+          Try a different keyword, or
+          <a href="contact.html" class="text-accent hover:underline">contact us</a> directly.
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12 rounded-2xl bg-surface border border-white/10 p-8 text-center reveal">
+        <h2 class="font-display text-xl font-bold text-white">Still have a question?</h2>
+        <p class="mt-2 text-sm text-slate-400">We're happy to help.</p>
+        <a href="contact.html" class="mt-5 inline-flex items-center gap-2 px-7 py-3 rounded-full
+           bg-accent hover:bg-indigo-500 text-white font-semibold transition hover:-translate-y-0.5
+           shadow-lg shadow-accent/40">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i> Contact Support
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/10 bg-surface/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+        <div class="lg:col-span-2">
+          <a href="index.html" class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center">
+              <i class="fa-solid fa-magnifying-glass text-white text-sm" aria-hidden="true"></i>
+            </span>
+            <span class="font-display font-bold text-xl text-white">Info<span class="text-accent">Sense</span></span>
+          </a>
+          <p class="mt-3 text-sm text-slate-400 max-w-xs">Verify Before You Share.</p>
+          <p class="mt-4 text-xs text-slate-500">AI-assisted analysis for news, claims, and statements — in Sinhala &amp; English.</p>
+        </div>
+        <nav aria-label="Product links">
+          <h3 class="footer-h">Product</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html#features"     class="footer-link">Features</a></li>
+            <li><a href="index.html#how-it-works" class="footer-link">How It Works</a></li>
+            <li><a href="index.html#download"     class="footer-link">Download</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Legal links">
+          <h3 class="footer-h">Legal</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="privacy.html"    class="footer-link">Privacy Policy</a></li>
+            <li><a href="terms.html"      class="footer-link">Terms &amp; Conditions</a></li>
+            <li><a href="disclaimer.html" class="footer-link">Disclaimer</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Support links">
+          <h3 class="footer-h">Support</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="faq.html"     class="footer-link">FAQ</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+            <li><a href="mailto:siriyalathaaththanayaka22@gmail.com" class="footer-link">Email Support</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <p>© 2026 Pradeetech. All rights reserved.</p>
+        <p>Made with <span class="text-danger" aria-hidden="true">❤️</span><span class="sr-only">love</span> for better information awareness.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="to-top" aria-label="Back to top"
+          class="fixed bottom-6 right-6 w-11 h-11 rounded-full bg-accent text-white shadow-lg shadow-accent/40
+                 opacity-0 pointer-events-none transition-all duration-300 hover:bg-indigo-500 grid place-items-center z-40">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <script src="js/app.js"></script>
+  <script src="js/faq.js"></script>
+</body>
+</html>

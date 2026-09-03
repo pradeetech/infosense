@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>About InfoSense — Why We Verify Before Sharing</title>
+  <meta name="description" content="Learn about InfoSense — an AI-assisted fact-checking app built to make information checking simpler and more accessible for Sinhala and English users." />
+  <link rel="canonical" href="https://pradeetech.github.io/infosense/about.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="About InfoSense" />
+  <meta property="og:description" content="In a world where information spreads faster than ever, knowing what to trust can be difficult. InfoSense makes checking information simpler." />
+  <meta property="og:url" content="https://pradeetech.github.io/infosense/about.html" />
+  <meta property="og:image" content="assets/images/og-cover.png" />
+
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: '#0f172a', surface: '#1e293b', accent: '#6366f1',
+            success: '#22c55e', warning: '#f59e0b', danger: '#ef4444',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Poppins', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* About page-specific (showcase card reuse) */
+    .showcase {
+      border-radius: 1.6rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: #0b1120;
+      box-shadow: 0 30px 70px -25px rgba(99, 102, 241, 0.5),
+                  0 0 0 6px rgba(255, 255, 255, 0.03);
+    }
+    .showcase img { width: 100%; height: auto; display: block; }
+  </style>
+</head>
+
+<body class="bg-base text-slate-300 font-sans antialiased">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="progress-bar" role="presentation"></div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="fixed top-0 inset-x-0 z-50 glass">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center shadow-lg shadow-accent/30">
+            <i class="fa-solid fa-magnifying-glass text-white text-sm" aria-hidden="true"></i>
+          </span>
+          <span class="font-display font-bold text-xl text-white tracking-tight">Info<span class="text-accent">Sense</span></span>
+        </a>
+
+        <ul class="hidden lg:flex items-center gap-7 text-sm font-medium">
+          <li><a href="index.html"              class="nav-link">Home</a></li>
+          <li><a href="index.html#features"     class="nav-link">Features</a></li>
+          <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="index.html#screenshots"  class="nav-link">Screenshots</a></li>
+          <li><a href="about.html"              class="nav-link nav-link--active" aria-current="page">About</a></li>
+          <li><a href="faq.html"                class="nav-link">FAQ</a></li>
+          <li><a href="privacy.html"            class="nav-link">Privacy</a></li>
+          <li><a href="contact.html"            class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center gap-3">
+          <a href="index.html#download"
+             class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+                    bg-accent hover:bg-indigo-500 text-white text-sm font-semibold
+                    transition-all duration-200 hover:-translate-y-0.5 shadow-lg shadow-accent/30">
+            <i class="fa-solid fa-download text-xs" aria-hidden="true"></i> Download App
+          </a>
+          <button id="menu-btn" class="lg:hidden w-10 h-10 grid place-items-center rounded-lg
+                 text-slate-300 hover:text-white hover:bg-white/10 transition"
+                 aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <i class="fa-solid fa-bars text-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="hidden lg:hidden pb-4" aria-label="Mobile navigation">
+        <ul class="flex flex-col gap-1 text-sm font-medium pt-2 border-t border-white/10">
+          <li><a href="index.html"              class="mobile-link">Home</a></li>
+          <li><a href="index.html#features"     class="mobile-link">Features</a></li>
+          <li><a href="index.html#how-it-works" class="mobile-link">How It Works</a></li>
+          <li><a href="index.html#screenshots"  class="mobile-link">Screenshots</a></li>
+          <li><a href="about.html"              class="mobile-link mobile-link--active" aria-current="page">About</a></li>
+          <li><a href="faq.html"                class="mobile-link">FAQ</a></li>
+          <li><a href="privacy.html"            class="mobile-link">Privacy Policy</a></li>
+          <li><a href="terms.html"              class="mobile-link">Terms &amp; Conditions</a></li>
+          <li><a href="contact.html"            class="mobile-link">Contact</a></li>
+          <li class="pt-2">
+            <a href="index.html#download" class="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent text-white font-semibold">
+              <i class="fa-solid fa-download" aria-hidden="true"></i> Download App
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main id="main" class="pt-16">
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+      <div class="absolute -top-32 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="relative max-w-3xl mx-auto text-center reveal">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30
+                     text-accent text-xs font-semibold tracking-wide uppercase mb-5">
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i> About
+        </span>
+        <h1 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">
+          About <span class="text-accent">InfoSense</span>
+        </h1>
+        <p class="mt-4 text-slate-400">Verify. Analyze. Trust.</p>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-6">
+
+      <!-- Opening quote -->
+      <div class="policy-card reveal text-center">
+        <i class="fa-solid fa-quote-left text-2xl text-accent" aria-hidden="true"></i>
+        <p class="!text-lg !text-slate-200 !leading-relaxed mt-4">
+          In a world where information spreads faster than ever, knowing what to
+          trust can be difficult. InfoSense was created to make information
+          checking simpler and more accessible.
+        </p>
+      </div>
+
+      <!-- The Problem -->
+      <section class="policy-card reveal">
+        <h2 class="policy-h2"><span class="policy-num"><i class="fa-solid fa-triangle-exclamation text-xs" aria-hidden="true"></i></span> The Problem</h2>
+        <p>
+          Every day, millions of claims, screenshots, forwards and headlines fill our feeds.
+          Some are true. Some are exaggerated. Some are completely false. And once a piece
+          of misinformation is shared, it is very hard to take back.
+        </p>
+        <p>
+          Most people don't have the time or tools to verify every claim they see —
+          especially when information is in <strong class="text-white">Sinhala</strong>,
+          where reliable fact-checking resources have traditionally been limited.
+        </p>
+      </section>
+
+      <!-- Our Approach -->
+      <section class="policy-card reveal">
+        <h2 class="policy-h2"><span class="policy-num"><i class="fa-solid fa-lightbulb text-xs" aria-hidden="true"></i></span> Our Approach</h2>
+        <p>
+          InfoSense brings AI-assisted analysis to your pocket. Instead of accepting or
+          ignoring a suspicious claim, you can check it in seconds:
+        </p>
+        <ul class="policy-list">
+          <li><strong class="text-white">Paste it</strong> — submit a claim, statement, article text or link</li>
+          <li><strong class="text-white">Analyze it</strong> — AI processes the content and evaluates it</li>
+          <li><strong class="text-white">Understand it</strong> — get a clear verdict, a confidence score, a summary and key evidence points</li>
+        </ul>
+        <p>
+          Results are presented in simple categories —
+          <span class="chip chip-success"><i class="fa-solid fa-check" aria-hidden="true"></i> TRUE</span>
+          <span class="chip chip-danger"><i class="fa-solid fa-xmark" aria-hidden="true"></i> FALSE</span>
+          <span class="chip chip-warning"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> MISLEADING</span>
+          <span class="chip chip-neutral"><i class="fa-solid fa-circle-question" aria-hidden="true"></i> UNVERIFIED</span>
+          — so anyone can understand them, without needing special knowledge.
+        </p>
+      </section>
+
+      <!-- Who it's for -->
+      <section class="policy-card reveal">
+        <h2 class="policy-h2"><span class="policy-num"><i class="fa-solid fa-users text-xs" aria-hidden="true"></i></span> Who Is It For?</h2>
+        <div class="grid sm:grid-cols-2 gap-3 mt-2">
+          <div class="contact-item"><span>Students</span><strong>Check facts for studies &amp; projects</strong></div>
+          <div class="contact-item"><span>Social-media users</span><strong>Verify before forwarding</strong></div>
+          <div class="contact-item"><span>News readers</span><strong>Understand headlines critically</strong></div>
+          <div class="contact-item"><span>Everyone</span><strong>Make informed sharing decisions</strong></div>
+        </div>
+      </section>
+
+      <!-- Why verify -->
+      <section class="policy-card reveal">
+        <h2 class="policy-h2"><span class="policy-num"><i class="fa-solid fa-share-nodes text-xs" aria-hidden="true"></i></span> Why Verify Before Sharing?</h2>
+        <p>
+          Sharing information is a responsibility. When you share something unverified,
+          it can reach hundreds of people within minutes — and misinformation can cause
+          real harm: panic, distrust, damaged reputations and bad decisions.
+        </p>
+        <p>
+          <strong class="text-white">Think Before You Share. Verify With InfoSense.</strong>
+          A few seconds of checking can make a real difference.
+        </p>
+      </section>
+
+      <!-- Honest limitations -->
+      <div class="callout callout-warning reveal">
+        <i class="fa-solid fa-robot mt-0.5" aria-hidden="true"></i>
+        <p><strong class="text-white">Honest note:</strong> InfoSense is an AI-assisted tool — not an absolute
+           authority. Results can contain errors, and information can change over time.
+           Always combine InfoSense results with your own judgment and reliable sources.
+           Read our full <a href="disclaimer.html" class="underline">Disclaimer</a>.</p>
+      </div>
+
+      <!-- Banner + quick facts -->
+      <section class="policy-card reveal">
+        <h2 class="policy-h2"><span class="policy-num"><i class="fa-solid fa-mobile-screen text-xs" aria-hidden="true"></i></span> InfoSense at a Glance</h2>
+        <div class="showcase my-4">
+          <img src="assets/images/og-cover.png"
+               alt="InfoSense — AI-Powered Fact Checking for a More Informed World"
+               loading="lazy"
+               onerror="this.style.display='none';" />
+        </div>
+        <dl class="grid sm:grid-cols-2 gap-3 text-sm">
+          <div class="info-item" style="background:rgba(15,23,42,.6);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 16px;">
+            <dt class="text-xs uppercase tracking-wider text-slate-500">App</dt>
+            <dd class="text-slate-200 font-medium">InfoSense (Android)</dd>
+          </div>
+          <div class="info-item" style="background:rgba(15,23,42,.6);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 16px;">
+            <dt class="text-xs uppercase tracking-wider text-slate-500">Developer</dt>
+            <dd class="text-slate-200 font-medium">Pradeetech</dd>
+          </div>
+          <div class="info-item" style="background:rgba(15,23,42,.6);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 16px;">
+            <dt class="text-xs uppercase tracking-wider text-slate-500">Languages</dt>
+            <dd class="text-slate-200 font-medium">Sinhala / English</dd>
+          </div>
+          <div class="info-item" style="background:rgba(15,23,42,.6);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px 16px;">
+            <dt class="text-xs uppercase tracking-wider text-slate-500">Category</dt>
+            <dd class="text-slate-200 font-medium">News &amp; Information</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- CTA -->
+      <div class="text-center pt-2 reveal">
+        <a href="index.html#download" class="inline-flex items-center gap-2 px-8 py-4 rounded-full
+           bg-accent hover:bg-indigo-500 text-white font-semibold transition hover:-translate-y-0.5
+           shadow-lg shadow-accent/40">
+          <i class="fa-solid fa-download" aria-hidden="true"></i>
+          Download InfoSense
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/10 bg-surface/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+        <div class="lg:col-span-2">
+          <a href="index.html" class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center">
+              <i class="fa-solid fa-magnifying-glass text-white text-sm" aria-hidden="true"></i>
+            </span>
+            <span class="font-display font-bold text-xl text-white">Info<span class="text-accent">Sense</span></span>
+          </a>
+          <p class="mt-3 text-sm text-slate-400 max-w-xs">Verify Before You Share.</p>
+          <p class="mt-4 text-xs text-slate-500">AI-assisted analysis for news, claims, and statements — in Sinhala &amp; English.</p>
+        </div>
+        <nav aria-label="Product links">
+          <h3 class="footer-h">Product</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html#features"     class="footer-link">Features</a></li>
+            <li><a href="index.html#how-it-works" class="footer-link">How It Works</a></li>
+            <li><a href="index.html#download"     class="footer-link">Download</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Legal links">
+          <h3 class="footer-h">Legal</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="privacy.html"    class="footer-link">Privacy Policy</a></li>
+            <li><a href="terms.html"      class="footer-link">Terms &amp; Conditions</a></li>
+            <li><a href="disclaimer.html" class="footer-link">Disclaimer</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Support links">
+          <h3 class="footer-h">Support</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="faq.html"     class="footer-link">FAQ</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+            <li><a href="mailto:siriyalathaaththanayaka22@gmail.com" class="footer-link">Email Support</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <p>© 2026 Pradeetech. All rights reserved.</p>
+        <p>Made with <span class="text-danger" aria-hidden="true">❤️</span><span class="sr-only">love</span> for better information awareness.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="to-top" aria-label="Back to top"
+          class="fixed bottom-6 right-6 w-11 h-11 rounded-full bg-accent text-white shadow-lg shadow-accent/40
+                 opacity-0 pointer-events-none transition-all duration-300 hover:bg-indigo-500 grid place-items-center z-40">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

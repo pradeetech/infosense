@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Terms &amp; Conditions | InfoSense</title>
+  <meta name="description" content="Terms and Conditions for using the InfoSense app and website — acceptable use, AI limitations, liability, and user responsibilities." />
+  <link rel="canonical" href="https://pradeetech.github.io/infosense/terms.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Terms &amp; Conditions | InfoSense" />
+  <meta property="og:description" content="The rules and limitations that apply when using InfoSense." />
+  <meta property="og:url" content="https://pradeetech.github.io/infosense/terms.html" />
+  <meta property="og:image" content="assets/images/og-cover.png" />
+
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: '#0f172a', surface: '#1e293b', accent: '#6366f1',
+            success: '#22c55e', warning: '#f59e0b', danger: '#ef4444',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Poppins', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-base text-slate-300 font-sans antialiased">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="progress-bar" role="presentation"></div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="fixed top-0 inset-x-0 z-50 glass">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center shadow-lg shadow-accent/30">
+            <i class="fa-solid fa-magnifying-glass text-white text-sm" aria-hidden="true"></i>
+          </span>
+          <span class="font-display font-bold text-xl text-white tracking-tight">Info<span class="text-accent">Sense</span></span>
+        </a>
+
+        <ul class="hidden lg:flex items-center gap-7 text-sm font-medium">
+          <li><a href="index.html"              class="nav-link">Home</a></li>
+          <li><a href="index.html#features"     class="nav-link">Features</a></li>
+          <li><a href="index.html#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="index.html#screenshots"  class="nav-link">Screenshots</a></li>
+          <li><a href="about.html"              class="nav-link">About</a></li>
+          <li><a href="faq.html"                class="nav-link">FAQ</a></li>
+          <li><a href="privacy.html"            class="nav-link">Privacy</a></li>
+          <li><a href="contact.html"            class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center gap-3">
+          <a href="index.html#download"
+             class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full
+                    bg-accent hover:bg-indigo-500 text-white text-sm font-semibold
+                    transition-all duration-200 hover:-translate-y-0.5 shadow-lg shadow-accent/30">
+            <i class="fa-solid fa-download text-xs" aria-hidden="true"></i> Download App
+          </a>
+          <button id="menu-btn" class="lg:hidden w-10 h-10 grid place-items-center rounded-lg
+                 text-slate-300 hover:text-white hover:bg-white/10 transition"
+                 aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <i class="fa-solid fa-bars text-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="hidden lg:hidden pb-4" aria-label="Mobile navigation">
+        <ul class="flex flex-col gap-1 text-sm font-medium pt-2 border-t border-white/10">
+          <li><a href="index.html"              class="mobile-link">Home</a></li>
+          <li><a href="index.html#features"     class="mobile-link">Features</a></li>
+          <li><a href="index.html#how-it-works" class="mobile-link">How It Works</a></li>
+          <li><a href="index.html#screenshots"  class="mobile-link">Screenshots</a></li>
+          <li><a href="about.html"              class="mobile-link">About</a></li>
+          <li><a href="faq.html"                class="mobile-link">FAQ</a></li>
+          <li><a href="privacy.html"            class="mobile-link">Privacy Policy</a></li>
+          <li><a href="terms.html"              class="mobile-link mobile-link--active" aria-current="page">Terms &amp; Conditions</a></li>
+          <li><a href="contact.html"            class="mobile-link">Contact</a></li>
+          <li class="pt-2">
+            <a href="index.html#download" class="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent text-white font-semibold">
+              <i class="fa-solid fa-download" aria-hidden="true"></i> Download App
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main id="main" class="pt-16">
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden pt-16 pb-12 px-4 sm:px-6 lg:px-8">
+      <div class="absolute -top-32 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="relative max-w-4xl mx-auto text-center reveal">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30
+                     text-accent text-xs font-semibold tracking-wide uppercase mb-5">
+          <i class="fa-solid fa-file-contract" aria-hidden="true"></i> Legal Document
+        </span>
+        <h1 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">
+          Terms &amp; <span class="text-accent">Conditions</span>
+        </h1>
+        <p class="mt-4 text-slate-400 max-w-2xl mx-auto">
+          The rules that apply when you use the InfoSense app and website.
+        </p>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs">
+          <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-white/10">
+            <i class="fa-regular fa-calendar text-accent" aria-hidden="true"></i>
+            Last Updated: <strong class="text-white font-semibold">September 3, 2026</strong>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content + TOC -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+      <div class="lg:grid lg:grid-cols-[270px_minmax(0,1fr)] lg:gap-10">
+
+        <!-- TOC desktop -->
+        <aside class="hidden lg:block" aria-label="Table of contents">
+          <nav class="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2
+                      rounded-2xl bg-surface/60 border border-white/10 p-5">
+            <p class="font-display text-sm font-semibold text-white mb-4 flex items-center gap-2">
+              <i class="fa-solid fa-list-ul text-accent" aria-hidden="true"></i> On This Page
+            </p>
+            <ul class="space-y-1 text-sm">
+              <li><a class="toc-link" href="#t1">1. Acceptance of Terms</a></li>
+              <li><a class="toc-link" href="#t2">2. Description of the Service</a></li>
+              <li><a class="toc-link" href="#t3">3. Appropriate Use</a></li>
+              <li><a class="toc-link" href="#t4">4. Prohibited Use</a></li>
+              <li><a class="toc-link" href="#t5">5. AI &amp; Accuracy Limitations</a></li>
+              <li><a class="toc-link" href="#t6">6. User Responsibility</a></li>
+              <li><a class="toc-link" href="#t7">7. Intellectual Property</a></li>
+              <li><a class="toc-link" href="#t8">8. Third-Party Services</a></li>
+              <li><a class="toc-link" href="#t9">9. Service Availability</a></li>
+              <li><a class="toc-link" href="#t10">10. Accounts &amp; Termination</a></li>
+              <li><a class="toc-link" href="#t11">11. Changes</a></li>
+              <li><a class="toc-link" href="#t12">12. Limitation of Liability</a></li>
+              <li><a class="toc-link" href="#t13">13. Contact</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <!-- TOC mobile -->
+        <details class="lg:hidden mb-6 rounded-2xl bg-surface border border-white/10 overflow-hidden">
+          <summary class="px-5 py-4 font-display font-semibold text-white cursor-pointer flex items-center gap-2 list-none [&::-webkit-details-marker]:hidden">
+            <i class="fa-solid fa-list-ul text-accent" aria-hidden="true"></i> On This Page
+            <i class="fa-solid fa-chevron-down ml-auto text-xs text-slate-400" aria-hidden="true"></i>
+          </summary>
+          <ul class="px-5 pb-4 space-y-2 text-sm border-t border-white/10 pt-3">
+            <li><a class="toc-link block py-1" href="#t1">1. Acceptance of Terms</a></li>
+            <li><a class="toc-link block py-1" href="#t2">2. Description of the Service</a></li>
+            <li><a class="toc-link block py-1" href="#t3">3. Appropriate Use</a></li>
+            <li><a class="toc-link block py-1" href="#t4">4. Prohibited Use</a></li>
+            <li><a class="toc-link block py-1" href="#t5">5. AI &amp; Accuracy Limitations</a></li>
+            <li><a class="toc-link block py-1" href="#t6">6. User Responsibility</a></li>
+            <li><a class="toc-link block py-1" href="#t7">7. Intellectual Property</a></li>
+            <li><a class="toc-link block py-1" href="#t8">8. Third-Party Services</a></li>
+            <li><a class="toc-link block py-1" href="#t9">9. Service Availability</a></li>
+            <li><a class="toc-link block py-1" href="#t10">10. Accounts &amp; Termination</a></li>
+            <li><a class="toc-link block py-1" href="#t11">11. Changes</a></li>
+            <li><a class="toc-link block py-1" href="#t12">12. Limitation of Liability</a></li>
+            <li><a class="toc-link block py-1" href="#t13">13. Contact</a></li>
+          </ul>
+        </details>
+
+        <!-- Content -->
+        <article class="space-y-6 min-w-0">
+
+          <div class="rounded-2xl bg-accent/10 border border-accent/25 p-5 flex items-start gap-4 reveal">
+            <i class="fa-solid fa-circle-info text-accent mt-1" aria-hidden="true"></i>
+            <p class="text-sm leading-relaxed">
+              Please read these Terms &amp; Conditions carefully before using InfoSense.
+              By accessing or using the InfoSense mobile application or website, you agree
+              to be bound by these Terms.
+            </p>
+          </div>
+
+          <section id="t1" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">1</span> Acceptance of Terms</h2>
+            <p>By downloading, installing, accessing or using InfoSense ("the Service"), you agree to these Terms &amp; Conditions and to our <a href="privacy.html" class="text-accent hover:underline">Privacy Policy</a>.</p>
+            <p>If you do not agree with any part of these Terms, you should not use the Service.</p>
+          </section>
+
+          <section id="t2" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">2</span> Description of the Service</h2>
+            <p>InfoSense is an <strong class="text-white">AI-assisted information analysis tool</strong> that helps users analyze submitted claims, statements, articles and links.</p>
+            <p>The Service may provide results such as TRUE, FALSE, MISLEADING or UNVERIFIED, along with explanations and estimated confidence scores.</p>
+            <div class="callout callout-accent">
+              <i class="fa-solid fa-robot mt-0.5" aria-hidden="true"></i>
+              <p><strong class="text-white">InfoSense is an AI-assisted analysis tool — it is not an absolute authority</strong> on truth, and its output should never be treated as a legally binding or professionally certified determination.</p>
+            </div>
+          </section>
+
+          <section id="t3" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">3</span> Appropriate Use</h2>
+            <p>You may use InfoSense to analyze information for personal, non-commercial and educational purposes, including:</p>
+            <ul class="policy-list">
+              <li>Checking news claims and statements before sharing them</li>
+              <li>Analyzing text from articles, posts and messages</li>
+              <li>Submitting article links for analysis</li>
+            </ul>
+          </section>
+
+          <section id="t4" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">4</span> Prohibited Use</h2>
+            <p>You agree NOT to use InfoSense to:</p>
+            <ul class="policy-list">
+              <li>Violate any applicable law or regulation</li>
+              <li>Submit content that is unlawful, harmful, hateful or harassing</li>
+              <li>Infringe the intellectual property or privacy rights of others</li>
+              <li>Submit other people's private or confidential information without consent</li>
+              <li>Attempt to disrupt, overload or reverse-engineer the Service or its infrastructure</li>
+              <li>Automate abusive access, circumvent usage limits, or misuse the Service in any way</li>
+            </ul>
+            <p>We may suspend or restrict access for violations of these Terms.</p>
+          </section>
+
+          <section id="t5" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">5</span> AI &amp; Accuracy Limitations</h2>
+            <p>Results are generated using artificial intelligence, which has inherent limitations:</p>
+            <ul class="policy-list">
+              <li>AI analysis can be incorrect, incomplete or outdated</li>
+              <li>A TRUE or FALSE result is not an absolute guarantee of correctness</li>
+              <li>Information changes over time — especially breaking news and developing events</li>
+              <li>Confidence scores are estimates, not measurements of truth</li>
+            </ul>
+            <p>See our full <a href="disclaimer.html" class="text-accent hover:underline">Disclaimer</a> for details.</p>
+          </section>
+
+          <section id="t6" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">6</span> User Responsibility</h2>
+            <p><strong class="text-white">You are responsible for how you use InfoSense results.</strong></p>
+            <p>You should independently verify important information using reliable, authoritative sources. InfoSense should not be used as the sole basis for medical, legal, financial, emergency or other high-impact decisions.</p>
+            <p>You are also responsible for the content you submit, and for ensuring you have the right to submit it.</p>
+          </section>
+
+          <section id="t7" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">7</span> Intellectual Property</h2>
+            <p>The InfoSense name, logo, interface design and website content are the property of Pradeetech and are protected by applicable intellectual property laws.</p>
+            <p>You may not copy, modify or distribute the Service's branding or code without permission. Content that you submit remains yours; however, you grant us the limited rights needed to process it in order to provide the Service, as described in the Privacy Policy.</p>
+          </section>
+
+          <section id="t8" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">8</span> Third-Party Services</h2>
+            <p>InfoSense relies on third-party services that operate under their own terms, which may include:</p>
+            <ul class="policy-list">
+              <li>Firebase (authentication, database, analytics, crash reporting)</li>
+              <li>Google Sign-In</li>
+              <li>Google Gemini (AI processing)</li>
+              <li>Google AdMob (advertising, where enabled)</li>
+              <li>GitHub (release distribution)</li>
+            </ul>
+            <p>We are not responsible for the practices of third-party providers. See our <a href="privacy.html" class="text-accent hover:underline">Privacy Policy</a> for more information.</p>
+          </section>
+
+          <section id="t9" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">9</span> Service Availability</h2>
+            <p>We aim to keep InfoSense available and reliable, but we do not guarantee uninterrupted or error-free operation.</p>
+            <p>The Service may be modified, suspended or discontinued — in whole or in part — at any time, for maintenance, technical, legal or business reasons.</p>
+          </section>
+
+          <section id="t10" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">10</span> Accounts &amp; Termination</h2>
+            <p>If the Service offers user accounts, you are responsible for keeping your credentials secure and for activity under your account.</p>
+            <p>We may suspend or terminate access if we reasonably believe these Terms have been violated, or where necessary for security or legal reasons. You may stop using the Service at any time and may request account deletion as described in the <a href="privacy.html#s9" class="text-accent hover:underline">Privacy Policy</a>.</p>
+          </section>
+
+          <section id="t11" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">11</span> Changes to the Service or Terms</h2>
+            <p>We may update these Terms from time to time. The "Last Updated" date at the top of this page reflects the current version.</p>
+            <p>Continued use of the Service after changes take effect constitutes acceptance of the updated Terms. For significant changes, additional notice may be provided where appropriate.</p>
+          </section>
+
+          <section id="t12" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">12</span> Limitation of Liability</h2>
+            <p>To the maximum extent permitted by applicable law:</p>
+            <ul class="policy-list">
+              <li>InfoSense is provided on an "as is" and "as available" basis, without warranties of any kind</li>
+              <li>Pradeetech shall not be liable for any indirect, incidental, special, consequential or punitive damages arising from your use of, or inability to use, the Service</li>
+              <li>We are not liable for decisions made or actions taken based on AI-generated results</li>
+            </ul>
+            <p>Nothing in these Terms limits liability that cannot be limited under applicable law.</p>
+          </section>
+
+          <section id="t13" class="policy-card reveal">
+            <h2 class="policy-h2"><span class="policy-num">13</span> Contact Information</h2>
+            <p>Questions about these Terms can be sent to:</p>
+            <div class="mt-4 grid sm:grid-cols-2 gap-3">
+              <div class="contact-item"><span>Developer</span><strong>Pradeetech</strong></div>
+              <div class="contact-item"><span>Application</span><strong>InfoSense</strong></div>
+              <div class="contact-item"><span>Android Package</span><strong>com.pradeetech.infosense</strong></div>
+              <div class="contact-item"><span>Email</span>
+                <a href="mailto:siriyalathaaththanayaka22@gmail.com" class="text-accent hover:text-indigo-400 break-all">
+                  siriyalathaaththanayaka22@gmail.com
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <!-- Bottom actions -->
+          <div class="flex flex-col sm:flex-row gap-3 pt-2 reveal">
+            <a href="privacy.html" class="flex-1 text-center px-6 py-3.5 rounded-xl bg-surface border border-white/10
+               hover:border-accent/50 text-white font-semibold text-sm transition">
+              <i class="fa-solid fa-shield-halved mr-2 text-accent" aria-hidden="true"></i> Privacy Policy
+            </a>
+            <a href="disclaimer.html" class="flex-1 text-center px-6 py-3.5 rounded-xl bg-surface border border-white/10
+               hover:border-accent/50 text-white font-semibold text-sm transition">
+              <i class="fa-solid fa-triangle-exclamation mr-2 text-warning" aria-hidden="true"></i> Disclaimer
+            </a>
+          </div>
+
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/10 bg-surface/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+        <div class="lg:col-span-2">
+          <a href="index.html" class="flex items-center gap-2.5">
+            <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center">
+              <i class="fa-solid fa-magnifying-glass text-white text-sm" aria-hidden="true"></i>
+            </span>
+            <span class="font-display font-bold text-xl text-white">Info<span class="text-accent">Sense</span></span>
+          </a>
+          <p class="mt-3 text-sm text-slate-400 max-w-xs">Verify Before You Share.</p>
+          <p class="mt-4 text-xs text-slate-500">AI-assisted analysis for news, claims, and statements — in Sinhala &amp; English.</p>
+        </div>
+        <nav aria-label="Product links">
+          <h3 class="footer-h">Product</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="index.html#features"     class="footer-link">Features</a></li>
+            <li><a href="index.html#how-it-works" class="footer-link">How It Works</a></li>
+            <li><a href="index.html#download"     class="footer-link">Download</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Legal links">
+          <h3 class="footer-h">Legal</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="privacy.html"    class="footer-link">Privacy Policy</a></li>
+            <li><a href="terms.html"      class="footer-link footer-link--active">Terms &amp; Conditions</a></li>
+            <li><a href="disclaimer.html" class="footer-link">Disclaimer</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Support links">
+          <h3 class="footer-h">Support</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="faq.html"     class="footer-link">FAQ</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+            <li><a href="mailto:siriyalathaaththanayaka22@gmail.com" class="footer-link">Email Support</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        <p>© 2026 Pradeetech. All rights reserved.</p>
+        <p>Made with <span class="text-danger" aria-hidden="true">❤️</span><span class="sr-only">love</span> for better information awareness.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="to-top" aria-label="Back to top"
+          class="fixed bottom-6 right-6 w-11 h-11 rounded-full bg-accent text-white shadow-lg shadow-accent/40
+                 opacity-0 pointer-events-none transition-all duration-300 hover:bg-indigo-500 grid place-items-center z-40">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
