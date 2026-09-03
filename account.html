@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+
+  <title>My Account | InfoSense</title>
+  <meta name="description" content="Manage your InfoSense account and subscription." />
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            base: '#0f172a', surface: '#1e293b', accent: '#6366f1',
+            success: '#22c55e', warning: '#f59e0b', danger: '#ef4444',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Poppins', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-base text-slate-300 font-sans antialiased">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div id="progress-bar" role="presentation"></div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="fixed top-0 inset-x-0 z-50 glass">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="flex items-center gap-2.5">
+          <span class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center shadow-lg shadow-accent/30">
+            <i class="fa-solid fa-magnifying-glass text-white text-sm" aria-hidden="true"></i>
+          </span>
+          <span class="font-display font-bold text-xl text-white tracking-tight">Info<span class="text-accent">Sense</span></span>
+        </a>
+
+        <ul class="hidden lg:flex items-center gap-7 text-sm font-medium">
+          <li><a href="index.html"              class="nav-link">Home</a></li>
+          <li><a href="index.html#features"     class="nav-link">Features</a></li>
+          <li><a href="index.html#download"     class="nav-link">Download</a></li>
+          <li><a href="about.html"              class="nav-link">About</a></li>
+          <li><a href="faq.html"                class="nav-link">FAQ</a></li>
+          <li><a href="privacy.html"            class="nav-link">Privacy</a></li>
+          <li><a href="contact.html"            class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="flex items-center gap-3">
+          <!-- auth.js injects Sign In / avatar here -->
+          <button id="menu-btn" class="lg:hidden w-10 h-10 grid place-items-center rounded-lg
+                 text-slate-300 hover:text-white hover:bg-white/10 transition"
+                 aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+            <i class="fa-solid fa-bars text-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu" class="hidden lg:hidden pb-4" aria-label="Mobile navigation">
+        <ul class="flex flex-col gap-1 text-sm font-medium pt-2 border-t border-white/10">
+          <li><a href="index.html"   class="mobile-link">Home</a></li>
+          <li><a href="faq.html"     class="mobile-link">FAQ</a></li>
+          <li><a href="contact.html" class="mobile-link">Contact</a></li>
+          <li class="pt-2">
+            <a href="index.html#download" class="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-accent text-white font-semibold">
+              <i class="fa-solid fa-download" aria-hidden="true"></i> Download App
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main id="main" class="pt-16">
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden pt-14 pb-10 px-4 sm:px-6 lg:px-8">
+      <div class="absolute -top-32 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+      <div class="relative max-w-3xl mx-auto text-center">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent/10 border border-accent/30
+                     text-accent text-xs font-semibold tracking-wide uppercase mb-5">
+          <i class="fa-solid fa-user-circle" aria-hidden="true"></i> Account
+        </span>
+        <h1 class="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight">
+          My <span class="text-accent">Account</span>
+        </h1>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-6">
+
+      <!-- Loading state -->
+      <div id="account-loading" class="policy-card text-center py-12">
+        <i class="fa-solid fa-circle-notch fa-spin text-2xl text-accent" aria-hidden="true"></i>
+        <p class="mt-4 text-sm text-slate-400">Loading your account…</p>
+      </div>
+
+      <!-- Profile + subscription (hidden until loaded) -->
+      <div id="account-content" class="hidden space-y-6">
+
+        <!-- Profile card -->
+        <section class="policy-card reveal visible">
+          <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 text-center sm:text-left">
+            <div id="acc-avatar" class="w-20 h-20 rounded-2xl bg-accent grid place-items-center text-white text-2xl font-bold shadow-lg shadow-accent/30 shrink-0 overflow-hidden"></div>
+            <div class="min-w-0">
+              <h2 id="acc-name" class="font-display text-xl font-bold text-white break-words">—</h2>
+              <p id="acc-email" class="text-sm text-slate-400 break-all mt-1">—</p>
+              <p id="acc-member" class="text-xs text-slate-500 mt-2"></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Subscription panel -->
+        <section class="policy-card reveal visible">
+          <div class="flex items-center justify-between flex-wrap gap-3 mb-5">
+            <h2 class="policy-h2 !mb-0">
+              <span class="policy-num"><i class="fa-solid fa-crown text-xs" aria-hidden="true"></i></span>
+              Subscription
+            </h2>
+            <span class="chip chip-neutral"><i class="fa-solid fa-gift" aria-hidden="true"></i> Free Plan</span>
+          </div>
+
+          <ul class="space-y-3">
+            <li class="plan-row plan-row-active">
+              <i class="fa-solid fa-check plan-ico text-success" aria-hidden="true"></i>
+              <div>
+                <p class="plan-title">Free Daily Checks</p>
+                <p class="plan-desc">Verify claims with a daily usage limit.</p>
+              </div>
+              <span class="ml-auto text-xs font-semibold text-success">Active</span>
+            </li>
+
+            <li class="plan-row">
+              <i class="fa-solid fa-lock plan-ico text-slate-500" aria-hidden="true"></i>
+              <div>
+                <p class="plan-title">Unlimited Daily Checks</p>
+                <p class="plan-desc">No daily limits — check as much as you want.</p>
+              </div>
+            </li>
+
+            <li class="plan-row">
+              <i class="fa-solid fa-lock plan-ico text-slate-500" aria-hidden="true"></i>
+              <div>
+                <p class="plan-title">Ad-Free Experience</p>
+                <p class="plan-desc">Use InfoSense without any advertisements.</p>
+              </div>
+            </li>
+
+            <li class="plan-row">
+              <i class="fa-solid fa-lock plan-ico text-slate-500" aria-hidden="true"></i>
+              <div>
+                <p class="plan-title">Priority AI Engine</p>
+                <p class="plan-desc">Faster, priority access to AI analysis.</p>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Coming Soon upgrade button -->
+          <button disabled class="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl
+                  bg-surface border border-dashed border-white/20 text-slate-400 font-semibold text-sm cursor-not-allowed">
+            <i class="fa-solid fa-hourglass-half text-warning" aria-hidden="true"></i>
+            Upgrade to Premium — Coming Soon
+          </button>
+
+          <div class="callout callout-accent mt-4">
+            <i class="fa-solid fa-bell mt-0.5" aria-hidden="true"></i>
+            <p>Online premium subscriptions for the website are coming soon.
+               Stay tuned — we'll announce it in the app and on this site.</p>
+          </div>
+        </section>
+
+        <!-- Quick links -->
+        <section class="grid sm:grid-cols-3 gap-3">
+          <a href="faq.html" class="quick-link"><i class="fa-solid fa-circle-question text-accent" aria-hidden="true"></i> FAQ</a>
+          <a href="contact.html" class="quick-link"><i class="fa-solid fa-envelope text-accent" aria-hidden="true"></i> Contact Support</a>
+          <a href="privacy.html#s9" class="quick-link"><i class="fa-solid fa-user-shield text-accent" aria-hidden="true"></i> Data &amp; Deletion</a>
+        </section>
+
+        <!-- Sign out -->
+        <button id="signout-btn" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl
+                bg-surface border border-danger/40 hover:border-danger text-danger font-semibold text-sm transition">
+          <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
+          Sign Out
+        </button>
+
+        <p class="text-xs text-slate-500 text-center">
+          To request full account deletion, see our
+          <a href="privacy.html#s9" class="text-accent hover:underline">Privacy Policy — Account &amp; Data Deletion</a>.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/10 bg-surface/40 py-6">
+    <p class="text-center text-xs text-slate-500">© 2026 Pradeetech. All rights reserved.</p>
+  </footer>
+
+  <button id="to-top" aria-label="Back to top"
+          class="fixed bottom-6 right-6 w-11 h-11 rounded-full bg-accent text-white shadow-lg shadow-accent/40
+                 opacity-0 pointer-events-none transition-all duration-300 hover:bg-indigo-500 grid place-items-center z-40">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <script src="js/app.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var loading  = document.getElementById("account-loading");
+      var content  = document.getElementById("account-content");
+      var avatarEl = document.getElementById("acc-avatar");
+      var nameEl   = document.getElementById("acc-name");
+      var emailEl  = document.getElementById("acc-email");
+      var memberEl = document.getElementById("acc-member");
+
+      window.__isSignedOut = false;
+
+      function render(user) {
+        /* Avatar */
+        if (user.photoURL) {
+          avatarEl.innerHTML = '<img src="' + user.photoURL + '" alt="" referrerpolicy="no-referrer" class="w-full h-full object-cover" />';
+        } else {
+          avatarEl.textContent = (user.displayName || user.email || "U").charAt(0).toUpperCase();
+        }
+        nameEl.textContent  = user.displayName || "InfoSense User";
+        emailEl.textContent = user.email || "";
+
+        /* Member since — Firestore doc එකෙන් */
+        if (window.InfoSenseAuth && window.InfoSenseAuth.db) {
+          window.InfoSenseAuth.db.collection("users").doc(user.uid).get()
+            .then(function (snap) {
+              if (snap.exists && snap.data().createdAt) {
+                var d = snap.data().createdAt.toDate();
+                memberEl.textContent = "Member since " +
+                  d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+              }
+            }).catch(function () {});
+        }
+
+        loading.classList.add("hidden");
+        content.classList.remove("hidden");
+      }
+
+      window.__isAuthListener = function (user) {
+        if (!user) {
+          if (window.__isSignedOut) {
+            window.location.replace("index.html");
+          } else {
+            window.location.replace("login.html");
+          }
+          return;
+        }
+        render(user);
+      };
+
+      document.getElementById("signout-btn").addEventListener("click", function () {
+        window.__isSignedOut = true;
+        if (window.InfoSenseAuth) {
+          window.InfoSenseAuth.signOut();
+        }
+      });
+    })();
+  </script>
+
+  <style>
+    .plan-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .plan-row-active { border-color: rgba(34, 197, 94, 0.35); }
+    .plan-ico {
+      width: 34px; height: 34px;
+      display: grid; place-items: center;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      flex-shrink: 0;
+      font-size: 0.8rem;
+    }
+    .plan-title { font-weight: 600; color: #e2e8f0; font-size: 0.9rem; }
+    .plan-desc  { font-size: 0.8rem; color: #64748b; margin-top: 2px; }
+
+    .quick-link {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px;
+      border-radius: 14px;
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .quick-link:hover { border-color: rgba(99, 102, 241, 0.45); transform: translateY(-2px); }
+  </style>
+</body>
+</html>
