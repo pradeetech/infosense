@@ -140,7 +140,6 @@
 
     <!-- ============ PAGE HERO ============ -->
     <section class="relative overflow-hidden pt-16 pb-12 px-4 sm:px-6 lg:px-8">
-      <!-- Soft glow decorations -->
       <div class="absolute -top-32 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
       <div class="absolute -bottom-40 right-0 w-80 h-80 bg-indigo-800/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
@@ -278,12 +277,14 @@
             <p>Depending on the features you use, InfoSense may collect or process the following categories of information.</p>
 
             <h3 class="policy-h3">2.1 — Account Information</h3>
-            <p>If you create an account or sign in using Google Authentication, we may receive information such as:</p>
+            <p>If you create an account, you may sign in using Google Authentication or Email/Password. Depending on the method used, we may receive or store information such as:</p>
             <ul class="policy-list">
               <li>Name</li>
               <li>Email address</li>
               <li>Profile picture URL</li>
               <li>Firebase user identifier (UID)</li>
+              <li>Username chosen by you (if you create an email/password account)</li>
+              <li>Password (stored only as a secure hash by Firebase Authentication — we never see or store your actual password)</li>
             </ul>
             <p>This information is used to create and manage your InfoSense account. We do not request or intentionally collect your Google password.</p>
 
@@ -654,7 +655,6 @@
           </a>
           <p class="mt-3 text-sm text-slate-400 max-w-xs">Verify Before You Share.</p>
           <p class="mt-4 text-xs text-slate-500">AI-assisted analysis for news, claims, and statements — in Sinhala &amp; English.</p>
-                    <!-- PhoenixVibe button -->
           <a href="https://pradeetech.github.io/phoenixvibe" target="_blank" rel="noopener"
              class="pv-button mt-5">
             <span class="pv-button-title">
@@ -693,6 +693,14 @@
             <li><a href="contact.html" class="footer-link">Contact</a></li>
             <li><a href="mailto:siriyalathaaththanayaka22@gmail.com" class="footer-link">Email Support</a></li>
           </ul>
+          <a href="https://pradeetech.github.io/phoenixvibe" target="_blank" rel="noopener"
+             class="pv-button mt-5">
+            <span class="pv-button-title">
+              <i class="fa-solid fa-palette" aria-hidden="true"></i>
+              PhoenixVibe <span aria-hidden="true">&rarr;</span>
+            </span>
+            <span class="pv-button-sub">Our Graphic Design Studio</span>
+          </a>
         </nav>
       </div>
 
@@ -714,6 +722,6 @@
 
   <script src="js/app.js"></script>
   <script src="js/firebase-config.js"></script>
-<script src="js/auth.js"></script>
+  <script src="js/auth.js"></script>
 </body>
 </html>
