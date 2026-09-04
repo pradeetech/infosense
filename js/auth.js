@@ -1,9 +1,9 @@
 /* ============================================================
    InfoSense — Authentication & Navbar User UI
-   - Google Sign-In (Firebase Auth)
-   - Navbar auto-injects: "Sign In" button / user avatar
-   - Firestore: creates users/{uid} profile on first login
-   Fails silently if firebase-config.js is not configured yet.
+   - Google Sign-In
+   - Email/Password: signup (username), login, reset
+   - Email verification gating (link-based, free tier safe)
+   - Username uniqueness via Firestore transaction
    ============================================================ */
 
 (function () {
@@ -11,17 +11,15 @@
 
   var cfg = window.FIREBASE_CONFIG;
   if (!cfg || !cfg.apiKey || cfg.apiKey.indexOf("PASTE") === 0) {
-    return; /* Config දමලා නැත්නම් කිසිවක් කරන්නේ නෑ */
+    return; /* config දමලා නැත්නම් මුකුත් කරන්නේ නෑ */
   }
 
   var SDK = "https://www.gstatic.com/firebasejs/10.12.2/";
 
   function loadScript(src, cb) {
     var s = document.createElement("script");
-    s.src = src;
-    s.async = true;
-    s.onload = cb;
-    s.onerror = cb;
+    s.src = src; s.async = true;
+    s.onload = cb; s.onerror = cb;
     document.head.appendChild(s);
   }
 
@@ -43,8 +41,9 @@
 
     var auth = firebase.auth();
     var db   = firebase.firestore();
+    var authInstance = firebase.auth;
 
-    /* ---------- Desktop navbar slot ---------- */
+    /* ---------- Navbar: desktop slot ---------- */
     function buildNavUI(user) {
       var container = document.querySelector("header nav .flex.items-center.gap-3");
       var old = document.getElementById("is-auth-slot");
@@ -62,7 +61,9 @@
           'transition-all duration-200 hover:-translate-y-0.5">' +
           '<i class="fa-solid fa-user text-xs text-accent" aria-hidden="true"></i> Sign In</a>';
       } else {
-        var initial = (user.displayName || user.email || "U").charAt(0).toUpperCase();
+        var label = user.displayName ||
+                    (user.email ? user.email.split("@")[0] : "My Account");
+        var initial = (label || "U").charAt(0).toUpperCase();
         var avatar = user.photoURL
           ? '<img src="' + user.photoURL + '" alt="" referrerpolicy="no-referrer" ' +
             'class="w-8 h-8 rounded-full border border-white/20 object-cover" />'
@@ -73,13 +74,12 @@
           '<a href="account.html" title="My Account" class="flex items-center gap-2 group">' +
           avatar +
           '<span class="hidden md:inline text-sm font-semibold text-white group-hover:text-accent transition">' +
-          escapeHtml(user.displayName || "My Account") + "</span></a>";
+          escapeHtml(label) + "</span></a>";
       }
-
       container.insertBefore(slot, container.firstChild);
     }
 
-    /* ---------- Mobile menu item ---------- */
+    /* ---------- Navbar: mobile item ---------- */
     function buildMobileUI(user) {
       var menu = document.getElementById("mobile-menu");
       if (!menu) return;
@@ -96,7 +96,7 @@
       if (ul) ul.insertBefore(li, ul.firstChild);
     }
 
-    /* ---------- Firestore profile sync ---------- */
+    /* ---------- Firestore user doc ---------- */
     function syncUserDoc(user) {
       if (!user) return;
       var ref = db.collection("users").doc(user.uid);
@@ -120,18 +120,95 @@
     auth.onAuthStateChanged(function (user) {
       buildNavUI(user);
       buildMobileUI(user);
-      syncUserDoc(user);
-
-      /* Pages can hook into this (login.html / account.html) */
+      if (user) syncUserDoc(user);
       if (typeof window.__isAuthListener === "function") {
         window.__isAuthListener(user);
       }
     });
 
-    /* Handle redirect fallback result */
     auth.getRedirectResult().catch(function () {});
 
-    /* ---------- Public helper API ---------- */
+    /* ---------- Username helpers ---------- */
+    function validateUsername(username) {
+      return /^[a-zA-Z0-9_]{3,20}$/.test(username || "");
+    }
+
+    function checkUsernameAvailable(username) {
+      if (!validateUsername(username)) {
+        return Promise.reject({ code: "username/invalid" });
+      }
+      return db.collection("usernames")
+        .doc(username.toLowerCase())
+        .get()
+        .then(function (snap) { return !snap.exists; });
+    }
+
+    /* ---------- Email sign up ---------- */
+    function signUpWithEmail(username, email, password) {
+      username = (username || "").trim();
+      if (!validateUsername(username)) {
+        return Promise.reject({ code: "username/invalid" });
+      }
+      var uname = username.toLowerCase();
+      var usernamesRef = db.collection("usernames").doc(uname);
+
+      /* quick pre-check for better UX */
+      return usernamesRef.get().then(function (snap) {
+        if (snap.exists) {
+          throw { code: "username/taken" };
+        }
+        /* create auth account */
+        return authInstance().createUserWithEmailAndPassword(email, password);
+      }).then(function (cred) {
+        var uid = cred.user.uid;
+
+        /* race-safe username claim */
+        return db.runTransaction(function (tx) {
+          return tx.get(usernamesRef).then(function (s) {
+            if (s.exists) {
+              throw { code: "username/taken" };
+            }
+            tx.set(usernamesRef, {
+              uid: uid,
+              username: uname,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            return null;
+          });
+        }).catch(function (err) {
+          if (err && err.code === "username/taken") {
+            /* rollback: remove just-created auth account */
+            return firebase.auth().currentUser.delete().then(function () {
+              throw err;
+            });
+          }
+          throw err;
+        }).then(function () {
+          /* profile doc */
+          return db.collection("users").doc(uid).set({
+            username:   uname,
+            displayName: username,
+            name:       username,
+            email:      email,
+            provider:   "password",
+            premium:    false,
+            plan:       "free",
+            createdAt:  firebase.firestore.FieldValue.serverTimestamp(),
+            lastLogin:  firebase.firestore.FieldValue.serverTimestamp()
+          }, { merge: true });
+        }).then(function () {
+          /* verification email (link) */
+          return cred.user.sendEmailVerification({
+            url: window.location.origin +
+                 window.location.pathname.replace(/[^/]*$/, "") + "login.html"
+          });
+        }).then(function () {
+          return cred.user;
+        });
+      });
+    }
+
+    /* ---------- Public API ---------- */
     window.InfoSenseAuth = {
       signInWithGoogle: function () {
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -143,9 +220,25 @@
           throw err;
         });
       },
+      signInWithEmail: function (email, password) {
+        return auth.signInWithEmailAndPassword(email, password);
+      },
+      signUpWithEmail: signUpWithEmail,
+      checkUsernameAvailable: checkUsernameAvailable,
+      sendVerification: function (user) {
+        return user.sendEmailVerification({
+          url: window.location.origin +
+               window.location.pathname.replace(/[^/]*$/, "") + "login.html"
+        });
+      },
+      reloadUser: function (user) { return user.reload(); },
+      sendPasswordReset: function (email) {
+        return auth.sendPasswordResetEmail(email);
+      },
       signOut: function () { return auth.signOut(); },
       getUser: function () { return auth.currentUser; },
-      db: db
+      db: db,
+      auth: auth
     };
   }
 })();
