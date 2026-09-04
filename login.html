@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex" />
 
   <title>Sign In | InfoSense</title>
-  <meta name="description" content="Sign in to InfoSense with your Google account." />
+  <meta name="description" content="Sign in to InfoSense with Google or Email." />
   <link rel="icon" type="image/png" href="assets/icons/favicon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,12 +33,83 @@
   </script>
 
   <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    .auth-field {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .auth-field::placeholder { color: #64748b; }
+    .auth-field:focus {
+      outline: none;
+      border-color: rgba(99, 102, 241, 0.6);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+    .auth-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #94a3b8;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 11px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .auth-tab:hover { color: #e2e8f0; }
+    .auth-tab.tab-active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.4);
+      color: #a5b4fc;
+    }
+    .mode-btn {
+      flex: 1;
+      padding: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #64748b;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .mode-btn.mode-active {
+      background: rgba(99, 102, 241, 0.12);
+      color: #a5b4fc;
+    }
+    .hint-ok  { color: #4ade80; font-size: 0.75rem; margin-top: 5px; }
+    .hint-bad { color: #f87171; font-size: 0.75rem; margin-top: 5px; }
+    .auth-submit {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      background: #6366f1;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .auth-submit:hover:not(:disabled) { background: #4f46e5; transform: translateY(-1px); }
+    .auth-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  </style>
 </head>
 
 <body class="bg-base text-slate-300 font-sans antialiased min-h-screen flex flex-col">
   <div id="progress-bar" role="presentation"></div>
 
-  <!-- Top bar -->
   <header class="glass">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between" aria-label="Main navigation">
       <a href="index.html" class="flex items-center gap-2.5">
@@ -53,43 +124,177 @@
     </nav>
   </header>
 
-  <!-- Sign-in card -->
   <main class="flex-1 grid place-items-center px-4 py-16 relative overflow-hidden">
     <div class="absolute -top-32 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
     <div class="relative w-full max-w-md">
-      <div class="policy-card text-center !p-8 sm:!p-10">
-        <span class="inline-flex w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center shadow-lg shadow-accent/40 mx-auto mb-6">
-          <i class="fa-solid fa-magnifying-glass text-white text-2xl" aria-hidden="true"></i>
-        </span>
 
-        <h1 class="font-display text-2xl sm:text-3xl font-bold text-white">Welcome Back</h1>
-        <p class="mt-2 text-sm text-slate-400">
-          Sign in to manage your account and subscription.
-        </p>
-
-        <!-- Error box -->
-        <div id="login-error" class="hidden callout callout-warning text-left mt-6" role="alert">
-          <i class="fa-solid fa-triangle-exclamation mt-0.5" aria-hidden="true"></i>
-          <p id="login-error-text"></p>
+      <!-- ============ AUTH CARD ============ -->
+      <div id="auth-card" class="policy-card !p-6 sm:!p-8">
+        <div class="text-center mb-6">
+          <span class="inline-flex w-14 h-14 rounded-2xl bg-gradient-to-br from-accent to-indigo-800 grid place-items-center shadow-lg shadow-accent/40 mb-4">
+            <i class="fa-solid fa-magnifying-glass text-white text-xl" aria-hidden="true"></i>
+          </span>
+          <h1 class="font-display text-2xl font-bold text-white">Welcome</h1>
+          <p class="mt-1 text-sm text-slate-400">Sign in to manage your account and subscription.</p>
         </div>
 
-        <!-- Google button -->
-        <button id="google-signin-btn"
-                class="mt-8 w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl
-                       bg-white text-slate-900 font-semibold text-sm
-                       hover:bg-slate-100 transition-all duration-200 hover:-translate-y-0.5
-                       shadow-lg disabled:opacity-60 disabled:pointer-events-none">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18A10.97 10.97 0 0 0 1 12c0 1.77.43 3.45 1.18 4.94l3.66-2.84z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/>
-          </svg>
-          <span id="google-signin-text">Continue with Google</span>
-        </button>
+        <!-- Tabs -->
+        <div class="flex gap-2 bg-surface/60 border border-white/10 rounded-2xl p-1.5 mb-5">
+          <button id="tab-google" type="button" class="auth-tab tab-active">
+            <i class="fab fa-google mr-1.5" aria-hidden="true"></i>Google
+          </button>
+          <button id="tab-email" type="button" class="auth-tab">
+            <i class="fa-solid fa-envelope mr-1.5" aria-hidden="true"></i>Email
+          </button>
+        </div>
 
-        <p class="mt-6 text-xs text-slate-500 leading-relaxed">
+        <!-- Shared message -->
+        <div id="form-msg" class="hidden callout callout-warning !p-4" role="alert">
+          <i class="fa-solid fa-circle-info mt-0.5" aria-hidden="true"></i>
+          <p id="form-msg-text" class="!text-sm"></p>
+        </div>
+
+        <!-- ============ GOOGLE PANEL ============ -->
+        <div id="panel-google">
+          <button id="google-signin-btn"
+                  class="mt-2 w-full inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl
+                         bg-white text-slate-900 font-semibold text-sm
+                         hover:bg-slate-100 transition-all duration-200 hover:-translate-y-0.5
+                         shadow-lg disabled:opacity-60 disabled:pointer-events-none">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18A10.97 10.97 0 0 0 1 12c0 1.77.43 3.45 1.18 4.94l3.66-2.84z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/>
+            </svg>
+            <span id="google-signin-text">Continue with Google</span>
+          </button>
+          <p class="mt-4 text-xs text-slate-500 text-center">
+            Fastest way — one click with your Google account.
+          </p>
+        </div>
+
+        <!-- ============ EMAIL PANEL ============ -->
+        <div id="panel-email" class="hidden">
+          <!-- mode toggle -->
+          <div class="flex gap-1 bg-surface/60 border border-white/10 rounded-xl p-1 mb-5">
+            <button id="mode-login" type="button" class="mode-btn mode-active">Sign In</button>
+            <button id="mode-signup" type="button" class="mode-btn">Create Account</button>
+          </div>
+
+          <!-- LOGIN FORM -->
+          <form id="form-login" class="space-y-4" novalidate>
+            <div>
+              <label class="auth-label" for="login-email">Email</label>
+              <input class="auth-field" type="email" id="login-email" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+            <div>
+              <label class="auth-label" for="login-pass">Password</label>
+              <input class="auth-field" type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password" required />
+            </div>
+            <button type="submit" id="login-btn" class="auth-submit">
+              <i class="fa-solid fa-right-to-bracket mr-2" aria-hidden="true"></i>Sign In
+            </button>
+            <p class="text-center">
+              <button type="button" id="forgot-link" class="text-xs text-accent hover:text-indigo-400 font-semibold">
+                Forgot password?
+              </button>
+            </p>
+          </form>
+
+          <!-- SIGNUP FORM -->
+          <form id="form-signup" class="hidden space-y-4" novalidate>
+            <div>
+              <label class="auth-label" for="su-username">Username</label>
+              <input class="auth-field" type="text" id="su-username" placeholder="e.g. sewvan_pradeep" autocomplete="username" required />
+              <p id="su-username-hint" class="hidden"></p>
+              <p class="text-xs text-slate-600 mt-1">3–20 characters — letters, numbers, underscore. Shown on your profile.</p>
+            </div>
+            <div>
+              <label class="auth-label" for="su-email">Email</label>
+              <input class="auth-field" type="email" id="su-email" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+            <div>
+              <label class="auth-label" for="su-pass">Password</label>
+              <input class="auth-field" type="password" id="su-pass" placeholder="At least 8 characters" autocomplete="new-password" required />
+            </div>
+            <div>
+              <label class="auth-label" for="su-pass2">Confirm Password</label>
+              <input class="auth-field" type="password" id="su-pass2" placeholder="Repeat password" autocomplete="new-password" required />
+            </div>
+            <button type="submit" id="signup-btn" class="auth-submit">
+              <i class="fa-solid fa-user-plus mr-2" aria-hidden="true"></i>Create Account
+            </button>
+            <p class="text-xs text-slate-500 text-center">
+              We'll send a verification link to your email — you must verify before signing in.
+            </p>
+          </form>
+        </div>
+
+        <!-- ============ VERIFY PANEL ============ -->
+        <div id="panel-verify" class="hidden text-center">
+          <span class="inline-flex w-16 h-16 rounded-2xl bg-success/15 border border-success/40 grid place-items-center mb-4">
+            <i class="fa-solid fa-envelope-circle-check text-success text-2xl" aria-hidden="true"></i>
+          </span>
+          <h2 class="font-display text-xl font-bold text-white">Verify Your Email</h2>
+          <p class="mt-2 text-sm text-slate-400 leading-relaxed">
+            We sent a verification link to<br />
+            <strong id="vf-email" class="text-white break-all"></strong><br />
+            Click the link in that email to activate your account.
+          </p>
+
+          <div id="vf-msg" class="hidden callout callout-accent !p-4 mt-4 text-left" role="status">
+            <i class="fa-solid fa-circle-info mt-0.5" aria-hidden="true"></i>
+            <p id="vf-msg-text" class="!text-sm"></p>
+          </div>
+
+          <div class="mt-6 space-y-3">
+            <button id="vf-continue" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl
+                    bg-accent hover:bg-indigo-500 text-white font-semibold text-sm transition">
+              <i class="fa-solid fa-rotate mr-2" aria-hidden="true"></i>
+              I've verified — Continue
+            </button>
+            <button id="vf-resend" class="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl
+                    bg-surface border border-white/10 text-slate-300 font-semibold text-sm transition
+                    disabled:opacity-50 disabled:cursor-not-allowed">
+              <i class="fa-solid fa-paper-plane mr-2" aria-hidden="true"></i>
+              <span id="vf-resend-text">Resend verification email</span>
+            </button>
+            <button id="vf-signout" type="button" class="text-xs text-slate-500 hover:text-danger font-semibold">
+              Use a different account
+            </button>
+          </div>
+
+          <p class="mt-5 text-xs text-slate-600">
+            <i class="fa-solid fa-triangle-exclamation mr-1" aria-hidden="true"></i>
+            Check your spam folder if you don't see the email.
+          </p>
+        </div>
+
+        <!-- ============ RESET PANEL ============ -->
+        <div id="panel-reset" class="hidden">
+          <h2 class="font-display text-lg font-bold text-white text-center">Reset Password</h2>
+          <p class="mt-2 text-sm text-slate-400 text-center">
+            Enter your email — we'll send you a password reset link.
+          </p>
+          <form id="form-reset" class="mt-5 space-y-4" novalidate>
+            <div>
+              <label class="auth-label" for="reset-email">Email</label>
+              <input class="auth-field" type="email" id="reset-email" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+            <button type="submit" id="reset-btn" class="auth-submit">
+              <i class="fa-solid fa-key mr-2" aria-hidden="true"></i>Send Reset Link
+            </button>
+          </form>
+          <p class="text-center mt-4">
+            <button type="button" id="reset-back" class="text-xs text-accent hover:text-indigo-400 font-semibold">
+              <i class="fa-solid fa-arrow-left mr-1" aria-hidden="true"></i>Back to Sign In
+            </button>
+          </p>
+        </div>
+
+        <p class="mt-6 text-xs text-slate-500 text-center leading-relaxed">
           By signing in, you agree to our
           <a href="terms.html" class="text-accent hover:underline">Terms &amp; Conditions</a> and
           <a href="privacy.html" class="text-accent hover:underline">Privacy Policy</a>.
@@ -98,7 +303,7 @@
 
       <p class="mt-6 text-center text-xs text-slate-500">
         <i class="fa-solid fa-lock text-accent mr-1" aria-hidden="true"></i>
-        Secured by Google Sign-In — we never see your password.
+        Secured by Firebase Authentication — we never see your password.
       </p>
     </div>
   </main>
@@ -114,45 +319,257 @@
   <script>
     (function () {
       "use strict";
+      function $(id) { return document.getElementById(id); }
 
-      var btn      = document.getElementById("google-signin-btn");
-      var btnText  = document.getElementById("google-signin-text");
-      var errorBox = document.getElementById("login-error");
-      var errorTxt = document.getElementById("login-error-text");
+      var authCard   = $("auth-card");
+      var verifyPnl  = $("panel-verify");
+      var currentUser = null;
+      var COOLDOWN   = 2 * 60 * 1000; /* 2 minutes */
+      var cooldownTimer = null;
 
-      function showError(msg) {
-        errorTxt.textContent = msg;
-        errorBox.classList.remove("hidden");
+      /* ---------- messages ---------- */
+      var msgBox = $("form-msg"), msgText = $("form-msg-text");
+      function showMsg(text, ok) {
+        msgText.textContent = text;
+        msgBox.classList.remove("hidden", "callout-warning", "callout-accent");
+        msgBox.classList.add(ok ? "callout-accent" : "callout-warning");
+      }
+      function hideMsg() { msgBox.classList.add("hidden"); }
+
+      var vfMsg = $("vf-msg"), vfMsgText = $("vf-msg-text");
+      function showVfMsg(text, ok) {
+        vfMsgText.textContent = text;
+        vfMsg.classList.remove("hidden", "callout-warning", "callout-accent");
+        vfMsg.classList.add(ok ? "callout-accent" : "callout-warning");
       }
 
-      /* Already signed in? → go to account */
-      window.__isAuthListener = function (user) {
-        if (user) window.location.replace("account.html");
-      };
+      function friendly(err) {
+        var c = (err && err.code) || "";
+        var map = {
+          "auth/invalid-email": "Please enter a valid email address.",
+          "auth/user-not-found": "No account found with this email.",
+          "auth/wrong-password": "Incorrect password. Try again or reset it.",
+          "auth/invalid-credential": "Incorrect email or password.",
+          "auth/email-already-in-use": "An account with this email already exists — try signing in instead.",
+          "auth/weak-password": "Password is too weak — use at least 8 characters.",
+          "auth/too-many-requests": "Too many attempts. Please wait a moment and try again.",
+          "auth/network-request-failed": "Network error. Check your connection and try again.",
+          "auth/popup-closed-by-user": "Sign-in window was closed before finishing.",
+          "auth/unauthorized-domain": "This domain is not authorized in Firebase yet.",
+          "username/taken": "This username is already taken.",
+          "username/invalid": "Username must be 3–20 characters (letters, numbers, underscore)."
+        };
+        return map[c] || "Something went wrong. Please try again.";
+      }
 
-      btn.addEventListener("click", function () {
-        if (!window.InfoSenseAuth) {
-          showError("Sign-in is still loading. Please wait a moment and try again.");
+      function setBusy(btn, busy, text) {
+        btn.disabled = busy;
+        if (busy) { btn.dataset.orig = btn.innerHTML; btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i>' + text; }
+        else if (btn.dataset.orig) { btn.innerHTML = btn.dataset.orig; }
+      }
+
+      /* ---------- routing gate ---------- */
+      function needsVerification(user) {
+        var isEmail = false;
+        (user.providerData || []).forEach(function (p) {
+          if (p.providerId === "password") isEmail = true;
+        });
+        return isEmail && !user.emailVerified;
+      }
+
+      function route(user) {
+        currentUser = user;
+        if (!user) {
+          authCard.classList.remove("hidden");
+          verifyPnl.classList.add("hidden");
           return;
         }
-        btn.disabled = true;
-        btnText.textContent = "Signing in…";
-        errorBox.classList.add("hidden");
+        if (needsVerification(user)) {
+          authCard.classList.add("hidden");
+          verifyPnl.classList.remove("hidden");
+          $("vf-email").textContent = user.email;
+          startCooldown();
+          /* silent re-check — if they just clicked the email link */
+          window.InfoSenseAuth.reloadUser(user)
+            .then(function () { return window.InfoSenseAuth.getUser().emailVerified; })
+            .then(function (verified) { if (verified) window.location.replace("account.html"); })
+            .catch(function () {});
+        } else {
+          window.location.replace("account.html");
+        }
+      }
+      window.__isAuthListener = route;
 
+      /* ---------- tabs & modes ---------- */
+      $("tab-google").addEventListener("click", function () {
+        $("panel-google").classList.remove("hidden");
+        $("panel-email").classList.add("hidden");
+        this.classList.add("tab-active"); $("tab-email").classList.remove("tab-active");
+        hideMsg();
+      });
+      $("tab-email").addEventListener("click", function () {
+        $("panel-email").classList.remove("hidden");
+        $("panel-google").classList.add("hidden");
+        this.classList.add("tab-active"); $("tab-google").classList.remove("tab-active");
+        hideMsg();
+      });
+      $("mode-login").addEventListener("click", function () {
+        $("form-login").classList.remove("hidden");
+        $("form-signup").classList.add("hidden");
+        this.classList.add("mode-active"); $("mode-signup").classList.remove("mode-active");
+        hideMsg();
+      });
+      $("mode-signup").addEventListener("click", function () {
+        $("form-signup").classList.remove("hidden");
+        $("form-login").classList.add("hidden");
+        this.classList.add("mode-active"); $("mode-login").classList.remove("mode-active");
+        hideMsg();
+      });
+      $("forgot-link").addEventListener("click", function () {
+        authCard.querySelector("#panel-email").classList.add("hidden");
+        $("panel-reset").classList.remove("hidden");
+        hideMsg();
+      });
+      $("reset-back").addEventListener("click", function () {
+        $("panel-reset").classList.add("hidden");
+        authCard.querySelector("#panel-email").classList.remove("hidden");
+        hideMsg();
+      });
+
+      /* ---------- Google ---------- */
+      $("google-signin-btn").addEventListener("click", function () {
+        if (!window.InfoSenseAuth) { showMsg("Sign-in is still loading. Try again in a moment.", false); return; }
+        setBusy(this, true, "Signing in…");
         window.InfoSenseAuth.signInWithGoogle().catch(function (err) {
-          btn.disabled = false;
-          btnText.textContent = "Continue with Google";
-
-          var msg = "Something went wrong. Please try again.";
-          if (err && err.code === "auth/popup-closed-by-user") {
-            msg = "Sign-in window was closed before finishing.";
-          } else if (err && err.code === "auth/unauthorized-domain") {
-            msg = "This domain is not authorized in Firebase. Add pradeetech.github.io to Authentication → Settings → Authorized domains.";
-          } else if (err && err.code === "auth/operation-not-allowed") {
-            msg = "Google Sign-In is not enabled in Firebase Console yet.";
-          }
-          showError(msg);
+          setBusy($("google-signin-btn"), false);
+          showMsg(friendly(err), false);
         });
+      });
+
+      /* ---------- Username availability ---------- */
+      $("su-username").addEventListener("blur", function () {
+        var v = this.value.trim(), hint = $("su-username-hint");
+        if (!v) { hint.className = "hidden"; return; }
+        window.InfoSenseAuth.checkUsernameAvailable(v).then(function (ok) {
+          hint.className = ok ? "hint-ok" : "hint-bad";
+          hint.textContent = ok ? "\u2713 Username available" : "\u2717 This username is already taken";
+        }).catch(function () { hint.className = "hidden"; });
+      });
+
+      /* ---------- Email Sign Up ---------- */
+      $("form-signup").addEventListener("submit", function (e) {
+        e.preventDefault();
+        hideMsg();
+        var username = $("su-username").value.trim();
+        var email    = $("su-email").value.trim();
+        var pass     = $("su-pass").value;
+        var pass2    = $("su-pass2").value;
+
+        if (pass !== pass2) { showMsg("Passwords do not match.", false); return; }
+        if (pass.length < 8) { showMsg("Password must be at least 8 characters.", false); return; }
+
+        setBusy($("signup-btn"), true, "Creating account…");
+        var pre = window.InfoSenseAuth.getUser()
+          ? window.InfoSenseAuth.signOut()
+          : Promise.resolve();
+
+        pre.then(function () {
+          return window.InfoSenseAuth.signUpWithEmail(username, email, pass);
+        }).then(function () {
+          setBusy($("signup-btn"), false);
+          /* listener auto-switches to verify panel */
+        }).catch(function (err) {
+          setBusy($("signup-btn"), false);
+          showMsg(friendly(err), false);
+        });
+      });
+
+      /* ---------- Email Sign In ---------- */
+      $("form-login").addEventListener("submit", function (e) {
+        e.preventDefault();
+        hideMsg();
+        setBusy($("login-btn"), true, "Signing in…");
+        window.InfoSenseAuth.signInWithEmail($("login-email").value.trim(), $("login-pass").value)
+          .catch(function (err) {
+            setBusy($("login-btn"), false);
+            showMsg(friendly(err), false);
+          });
+      });
+
+      /* ---------- Password reset ---------- */
+      $("form-reset").addEventListener("submit", function (e) {
+        e.preventDefault();
+        setBusy($("reset-btn"), true, "Sending…");
+        window.InfoSenseAuth.sendPasswordReset($("reset-email").value.trim())
+          .then(function () {
+            setBusy($("reset-btn"), false);
+            $("reset-back").click();
+            showMsg("Password reset link sent! Check your inbox (and spam folder).", true);
+          })
+          .catch(function (err) {
+            setBusy($("reset-btn"), false);
+            showMsg(friendly(err), false);
+          });
+      });
+
+      /* ---------- Verify panel ---------- */
+      function vsKey(uid) { return "is_vsent_" + uid; }
+
+      function startCooldown() {
+        if (cooldownTimer) clearInterval(cooldownTimer);
+        if (!currentUser) return;
+        var btn = $("vf-resend"), txt = $("vf-resend-text");
+        var end = parseInt(localStorage.getItem(vsKey(currentUser.uid)) || "0", 10) + COOLDOWN;
+
+        function tick() {
+          var remain = end - Date.now();
+          if (remain <= 0) {
+            clearInterval(cooldownTimer); cooldownTimer = null;
+            btn.disabled = false;
+            txt.textContent = "Resend verification email";
+            return;
+          }
+          btn.disabled = true;
+          var m = Math.floor(remain / 60000);
+          var s = Math.floor((remain % 60000) / 1000);
+          txt.textContent = "Resend in " + m + ":" + (s < 10 ? "0" + s : s);
+        }
+        tick();
+        cooldownTimer = setInterval(tick, 1000);
+      }
+
+      $("vf-resend").addEventListener("click", function () {
+        var u = window.InfoSenseAuth.getUser();
+        if (!u) return;
+        setBusy(this, true, "Sending…");
+        window.InfoSenseAuth.sendVerification(u).then(function () {
+          localStorage.setItem(vsKey(u.uid), Date.now());
+          setBusy($("vf-resend"), false);
+          showVfMsg("Verification email sent again! Check your inbox and spam folder.", true);
+          startCooldown();
+        }).catch(function (err) {
+          setBusy($("vf-resend"), false);
+          showVfMsg(friendly(err), false);
+          startCooldown();
+        });
+      });
+
+      $("vf-continue").addEventListener("click", function () {
+        var u = window.InfoSenseAuth.getUser();
+        if (!u) return;
+        setBusy(this, true, "Checking…");
+        window.InfoSenseAuth.reloadUser(u).then(function () {
+          if (window.InfoSenseAuth.getUser().emailVerified) {
+            window.location.replace("account.html");
+          } else {
+            setBusy($("vf-continue"), false);
+            showVfMsg("Still not verified — please click the link in the email we sent you.", false);
+          }
+        }).catch(function () { setBusy($("vf-continue"), false); });
+      });
+
+      $("vf-signout").addEventListener("click", function () {
+        window.InfoSenseAuth.signOut();
       });
     })();
   </script>
