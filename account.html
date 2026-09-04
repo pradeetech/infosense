@@ -121,6 +121,7 @@
             <div class="min-w-0">
               <h2 id="acc-name" class="font-display text-xl font-bold text-white break-words">—</h2>
               <p id="acc-email" class="text-sm text-slate-400 break-all mt-1">—</p>
+              <span id="acc-provider" class="chip chip-neutral mt-2"><i class="fa-solid fa-id-badge" aria-hidden="true"></i> Account</span>
               <p id="acc-member" class="text-xs text-slate-500 mt-2"></p>
             </div>
           </div>
@@ -232,29 +233,43 @@
       var nameEl   = document.getElementById("acc-name");
       var emailEl  = document.getElementById("acc-email");
       var memberEl = document.getElementById("acc-member");
+      var badgeEl  = document.getElementById("acc-provider");
 
       window.__isSignedOut = false;
 
-      function render(user) {
-        /* Avatar */
+      function isEmailProvider(user) {
+        var isEmail = false;
+        (user.providerData || []).forEach(function (p) {
+          if (p.providerId === "password") isEmail = true;
+        });
+        return isEmail;
+      }
+
+      function render(user, doc) {
+        /* Display name: Firestore username → Google name → email prefix */
+        var display = user.displayName;
+        if (doc && doc.displayName) display = doc.displayName;
+        else if (doc && doc.username) display = doc.username;
+        if (!display && user.email) display = user.email.split("@")[0];
+
         if (user.photoURL) {
           avatarEl.innerHTML = '<img src="' + user.photoURL + '" alt="" referrerpolicy="no-referrer" class="w-full h-full object-cover" />';
         } else {
-          avatarEl.textContent = (user.displayName || user.email || "U").charAt(0).toUpperCase();
+          avatarEl.textContent = (display || "U").charAt(0).toUpperCase();
         }
-        nameEl.textContent  = user.displayName || "InfoSense User";
+        nameEl.textContent  = display || "InfoSense User";
         emailEl.textContent = user.email || "";
 
-        /* Member since — Firestore doc එකෙන් */
-        if (window.InfoSenseAuth && window.InfoSenseAuth.db) {
-          window.InfoSenseAuth.db.collection("users").doc(user.uid).get()
-            .then(function (snap) {
-              if (snap.exists && snap.data().createdAt) {
-                var d = snap.data().createdAt.toDate();
-                memberEl.textContent = "Member since " +
-                  d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-              }
-            }).catch(function () {});
+        if (badgeEl) {
+          badgeEl.innerHTML = isEmailProvider(user)
+            ? '<i class="fa-solid fa-envelope" aria-hidden="true"></i> Email Account'
+            : '<i class="fab fa-google" aria-hidden="true"></i> Google Account';
+        }
+
+        if (doc && doc.createdAt && doc.createdAt.toDate) {
+          var d = doc.createdAt.toDate();
+          memberEl.textContent = "Member since " +
+            d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
         }
 
         loading.classList.add("hidden");
@@ -270,7 +285,18 @@
           }
           return;
         }
-        render(user);
+        /* Email accounts must be verified before access */
+        if (isEmailProvider(user) && !user.emailVerified) {
+          window.location.replace("login.html");
+          return;
+        }
+        if (window.InfoSenseAuth && window.InfoSenseAuth.db) {
+          window.InfoSenseAuth.db.collection("users").doc(user.uid).get()
+            .then(function (snap) { render(user, snap.exists ? snap.data() : null); })
+            .catch(function () { render(user, null); });
+        } else {
+          render(user, null);
+        }
       };
 
       document.getElementById("signout-btn").addEventListener("click", function () {
